@@ -445,6 +445,7 @@
 		08CD42E714B7B8AA009CA2A2 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		08D93A15159FE174003B04EC /* clip_macosx64.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = clip_macosx64.mm; sourceTree = "<group>"; };
 		5588B3CD1795C52F00BE6E37 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Launcher/English.lproj/VMSettingsWindow.xib; sourceTree = "<group>"; };
+		5588B42E1795C9E000BE6E37 /* autorelease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autorelease.h; sourceTree = "<group>"; };
 		55EC758316EEC49E00CC47AD /* disk_sparsebundle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = disk_sparsebundle.cpp; path = ../Unix/disk_sparsebundle.cpp; sourceTree = SOURCE_ROOT; };
 		55EC759716EEC4C500CC47AD /* tinyxml2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxml2.cpp; path = ../Unix/tinyxml2.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -827,6 +828,7 @@
 				0856CE7014A99EF0000B1711 /* prefs_macosx.mm */,
 				0856CE8314A99EF0000B1711 /* SheepShaver.icns */,
 				0856CE8714A99EF0000B1711 /* sys_darwin.cpp */,
+				5588B42E1795C9E000BE6E37 /* autorelease.h */,
 			);
 			name = MacOSX;
 			sourceTree = "<group>";

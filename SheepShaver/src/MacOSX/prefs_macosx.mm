@@ -81,7 +81,7 @@
 
 - (void) openPreferences:(id)sender
 {
-	NSAutoreleasePool *pool;
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
 	if (nibObjects == nil) {
 		nibObjects = [self loadPrefsNibFile];
@@ -90,10 +90,9 @@
 		[nibObjects retain];
 	}
 
-	pool = [[NSAutoreleasePool alloc] init];
 	[[VMSettingsController sharedInstance] setupGUI];
 	[NSApp runModalForWindow:prefsWindow];
-	[pool release];
+	[pool drain];
 }
 
 @end
@@ -104,11 +103,9 @@
 
 void prefs_init(void)
 {
-	NSAutoreleasePool *pool;
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	NSMenu *appMenu;
 	NSMenuItem *menuItem;
-
-	pool = [[NSAutoreleasePool alloc] init];
 
 	appMenu = [[[NSApp mainMenu] itemAtIndex:0] submenu];
 	menuItem = [[NSMenuItem alloc] initWithTitle:@"Preferences..." action:@selector(openPreferences:) keyEquivalent:@","];
@@ -118,7 +115,7 @@ void prefs_init(void)
 	
 	[NSApp setDelegate:[[SheepShaverMain alloc] init]];
 
-	[pool release];
+	[pool drain];
 }
 
 

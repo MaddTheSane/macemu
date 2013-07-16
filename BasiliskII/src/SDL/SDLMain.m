@@ -227,7 +227,7 @@ static void CustomApplicationMain (int argc, char **argv)
     [NSApp run];
     
     [sdlMain release];
-    [pool release];
+    [pool drain];
 }
 
 #endif
