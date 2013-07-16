@@ -759,8 +759,6 @@ if [[ "x$WANT_SDL_VIDEO" = "xyes" ]]; then
     else
       EXTRASYSSRCS="$EXTRASYSSRCS ../MacOSX/clip_macosx.cpp"
     fi
-    EXTRASYSSRCS="$EXTRASYSSRCS ../MacOSX/utils_macosx.mm"
-    CPPFLAGS="$CPPFLAGS -I../MacOSX"
   else
     case "$target_os" in
     cygwin*)

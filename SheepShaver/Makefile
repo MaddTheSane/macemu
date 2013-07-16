@@ -82,7 +82,6 @@ links:
 	       MacOSX/MacOSX_sound_if.cpp MacOSX/MacOSX_sound_if.h \
 	       MacOSX/AudioBackEnd.cpp MacOSX/AudioBackEnd.h \
 	       MacOSX/AudioDevice.cpp MacOSX/AudioDevice.h MacOSX/audio_macosx.cpp \
-	       MacOSX/utils_macosx.mm MacOSX/utils_macosx.h \
 	       Windows/cd_defs.h Windows/cdenable Windows/extfs_windows.cpp \
 	       Windows/posix_emu.cpp Windows/posix_emu.h Windows/sys_windows.cpp \
 	       Windows/timer_windows.cpp Windows/util_windows.cpp \
