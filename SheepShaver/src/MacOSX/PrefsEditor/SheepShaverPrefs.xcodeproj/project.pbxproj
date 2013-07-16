@@ -11,7 +11,7 @@
 		08DC90BD0B67074C00799A45 /* prefs_items.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08DC90BC0B67074C00799A45 /* prefs_items.cpp */; };
 		08DC90BF0B67075D00799A45 /* prefs_unix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08DC90BE0B67075D00799A45 /* prefs_unix.cpp */; };
 		08DC90C10B67077300799A45 /* prefs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08DC90C00B67077300799A45 /* prefs.cpp */; };
-		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
+		5588B3F31795C59300BE6E37 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5588B3F11795C59300BE6E37 /* MainMenu.xib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -27,15 +27,18 @@
 		08DC90C20B67078300799A45 /* prefs.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = prefs.h; path = ../../include/prefs.h; sourceTree = SOURCE_ROOT; };
 		08DC90C40B67079800799A45 /* sys.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = sys.h; path = ../../include/sys.h; sourceTree = SOURCE_ROOT; };
 		08DC90C50B6707AC00799A45 /* user_strings_unix.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = user_strings_unix.h; path = ../../Unix/user_strings_unix.h; sourceTree = SOURCE_ROOT; };
-		08DC90C60B6707B400799A45 /* config.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../../Unix/config.h; sourceTree = SOURCE_ROOT; };
 		08DC90C70B6707BE00799A45 /* sysdeps.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = sysdeps.h; path = ../../Unix/sysdeps.h; sourceTree = SOURCE_ROOT; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* SheepShaverPrefs_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SheepShaverPrefs_Prefix.pch; sourceTree = "<group>"; };
+		5588B3F21795C59300BE6E37 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		5588B4231795C81A00BE6E37 /* config-macosx-ppc_32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "config-macosx-ppc_32.h"; sourceTree = "<group>"; };
+		5588B4241795C81A00BE6E37 /* config-macosx-x86_32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "config-macosx-x86_32.h"; sourceTree = "<group>"; };
+		5588B4251795C81A00BE6E37 /* config-macosx-x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "config-macosx-x86_64.h"; sourceTree = "<group>"; };
+		5588B4261795C81A00BE6E37 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* SheepShaverPrefs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SheepShaverPrefs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -91,7 +94,7 @@
 				08DC90C20B67078300799A45 /* prefs.h */,
 				08DC90C40B67079800799A45 /* sys.h */,
 				08DC90C50B6707AC00799A45 /* user_strings_unix.h */,
-				08DC90C60B6707B400799A45 /* config.h */,
+				5588B4221795C81A00BE6E37 /* config */,
 				08DC90C70B6707BE00799A45 /* sysdeps.h */,
 				08DC90BC0B67074C00799A45 /* prefs_items.cpp */,
 				08DC90BE0B67075D00799A45 /* prefs_unix.cpp */,
@@ -121,7 +124,7 @@
 			children = (
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
-				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+				5588B3F11795C59300BE6E37 /* MainMenu.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -134,6 +137,18 @@
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
+		};
+		5588B4221795C81A00BE6E37 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				5588B4231795C81A00BE6E37 /* config-macosx-ppc_32.h */,
+				5588B4241795C81A00BE6E37 /* config-macosx-x86_32.h */,
+				5588B4251795C81A00BE6E37 /* config-macosx-x86_64.h */,
+				5588B4261795C81A00BE6E37 /* config.h */,
+			);
+			name = config;
+			path = ../config;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -185,8 +200,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				5588B3F31795C59300BE6E37 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,12 +231,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+		5588B3F11795C59300BE6E37 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				29B97319FDCFA39411CA2CEA /* English */,
+				5588B3F21795C59300BE6E37 /* English */,
 			);
-			name = MainMenu.nib;
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
