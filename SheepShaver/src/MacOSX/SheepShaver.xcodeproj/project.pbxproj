@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -119,7 +119,6 @@
 		0873A76914ABD151004F12B7 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 0873A76714ABD151004F12B7 /* config.h */; };
 		0873A76A14ABD151004F12B7 /* config-macosx-x86_64.h in Headers */ = {isa = PBXBuildFile; fileRef = 0873A76614ABD151004F12B7 /* config-macosx-x86_64.h */; };
 		0873A76B14ABD151004F12B7 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 0873A76714ABD151004F12B7 /* config.h */; };
-		0873A80214AC515D004F12B7 /* utils_macosx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0873A80114AC515D004F12B7 /* utils_macosx.mm */; };
 		0879BD5E15A88F7600DC277D /* pict.c in Sources */ = {isa = PBXBuildFile; fileRef = 0879BD5D15A88F7600DC277D /* pict.c */; };
 		0879BD8715A891EC00DC277D /* config-macosx-ppc_32.h in Headers */ = {isa = PBXBuildFile; fileRef = 0879BD8515A891EC00DC277D /* config-macosx-ppc_32.h */; };
 		0879BD8815A891EC00DC277D /* config-macosx-x86_32.h in Headers */ = {isa = PBXBuildFile; fileRef = 0879BD8615A891EC00DC277D /* config-macosx-x86_32.h */; };
@@ -436,8 +435,6 @@
 		0873A5D714AB80E3004F12B7 /* ppc-dyngen-ops.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "ppc-dyngen-ops.cpp"; sourceTree = "<group>"; };
 		0873A76614ABD151004F12B7 /* config-macosx-x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "config-macosx-x86_64.h"; sourceTree = "<group>"; };
 		0873A76714ABD151004F12B7 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
-		0873A80014AC515D004F12B7 /* utils_macosx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils_macosx.h; sourceTree = "<group>"; };
-		0873A80114AC515D004F12B7 /* utils_macosx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = utils_macosx.mm; sourceTree = "<group>"; };
 		0879BD5B15A88F6300DC277D /* pict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pict.h; sourceTree = "<group>"; };
 		0879BD5D15A88F7600DC277D /* pict.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pict.c; path = ../pict.c; sourceTree = SOURCE_ROOT; };
 		0879BD8515A891EC00DC277D /* config-macosx-ppc_32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "config-macosx-ppc_32.h"; sourceTree = "<group>"; };
@@ -448,6 +445,8 @@
 		08CD42DB14B7B85B009CA2A2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		08CD42E714B7B8AA009CA2A2 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		08D93A15159FE174003B04EC /* clip_macosx64.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = clip_macosx64.mm; sourceTree = "<group>"; };
+		55EC758316EEC49E00CC47AD /* disk_sparsebundle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = disk_sparsebundle.cpp; path = ../Unix/disk_sparsebundle.cpp; sourceTree = SOURCE_ROOT; };
+		55EC759716EEC4C500CC47AD /* tinyxml2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxml2.cpp; path = ../Unix/tinyxml2.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -572,6 +571,8 @@
 				0856CE0614A99EEF000B1711 /* MacOSX */,
 				0856CE8814A99EF0000B1711 /* main.cpp */,
 				0856CE8914A99EF0000B1711 /* name_registry.cpp */,
+				55EC758316EEC49E00CC47AD /* disk_sparsebundle.cpp */,
+				55EC759716EEC4C500CC47AD /* tinyxml2.cpp */,
 				0879BD5D15A88F7600DC277D /* pict.c */,
 				0856CE8A14A99EF0000B1711 /* prefs_items.cpp */,
 				0856CE8B14A99EF0000B1711 /* prefs.cpp */,
@@ -826,8 +827,6 @@
 				0856CE7014A99EF0000B1711 /* prefs_macosx.mm */,
 				0856CE8314A99EF0000B1711 /* SheepShaver.icns */,
 				0856CE8714A99EF0000B1711 /* sys_darwin.cpp */,
-				0873A80014AC515D004F12B7 /* utils_macosx.h */,
-				0873A80114AC515D004F12B7 /* utils_macosx.mm */,
 			);
 			name = MacOSX;
 			sourceTree = "<group>";
@@ -1198,7 +1197,7 @@
 		0856CCAE14A99DE0000B1711 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 0856CCB114A99DE0000B1711 /* Build configuration list for PBXProject "SheepShaver" */;
-			compatibilityVersion = "Xcode 3.0";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1449,7 +1448,6 @@
 				0856D13F14A99EF1000B1711 /* xpram.cpp in Sources */,
 				0856D33914A9A704000B1711 /* VMSettingsController.mm in Sources */,
 				082AC22D14AA52E900071F5E /* prefs_editor_dummy.cpp in Sources */,
-				0873A80214AC515D004F12B7 /* utils_macosx.mm in Sources */,
 				083E370C16EFE85000CCCA59 /* disk_sparsebundle.cpp in Sources */,
 				083E372216EFE87200CCCA59 /* tinyxml2.cpp in Sources */,
 			);
@@ -1582,7 +1580,7 @@
 				PREBINDING = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = lowmem;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 			};
 			name = Debug;
 		};
@@ -1608,7 +1606,7 @@
 				PREBINDING = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = lowmem;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -1648,7 +1646,7 @@
 				INSTALL_PATH = /usr/local/lib;
 				PREBINDING = NO;
 				PRODUCT_NAME = kpx_cpu;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 				"SDKROOT[arch=x86_64]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
 			name = Debug;
@@ -1694,7 +1692,7 @@
 				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.6;
 				PREBINDING = NO;
 				PRODUCT_NAME = kpx_cpu;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 				"SDKROOT[arch=x86_64]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				ZERO_LINK = NO;
 			};
@@ -1719,7 +1717,7 @@
 				INSTALL_PATH = /usr/local/lib;
 				PREBINDING = NO;
 				PRODUCT_NAME = ppc_asm;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 			};
 			name = Debug;
 		};
@@ -1741,7 +1739,7 @@
 				INSTALL_PATH = /usr/local/lib;
 				PREBINDING = NO;
 				PRODUCT_NAME = ppc_asm;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -1750,6 +1748,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				GCC_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1792,6 +1791,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = 4.0;
+				"GCC_VERSION[arch=x86_64]" = 4.2;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -1809,7 +1809,8 @@
 				INFOPLIST_PREPROCESS = NO;
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
+				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
@@ -1836,8 +1837,8 @@
 				PREBINDING = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = SheepShaver;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
-				"SDKROOT[arch=x86_64]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SDKROOT = macosx10.5;
+				"SDKROOT[arch=x86_64]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				WARNING_LDFLAGS = "";
 			};
 			name = Debug;
@@ -1898,7 +1899,7 @@
 				INFOPLIST_PREPROCESS = NO;
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
+				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.6;
 				OTHER_CFLAGS = "";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
@@ -1925,9 +1926,8 @@
 				PREBINDING = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = SheepShaver;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
-				"SDKROOT[arch=x86_64]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
-				ZERO_LINK = NO;
+				SDKROOT = macosx10.5;
+				"SDKROOT[arch=x86_64]" = macosx10.6;
 			};
 			name = Release;
 		};
@@ -1954,7 +1954,7 @@
 				PREBINDING = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = dyngen;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 			};
 			name = Debug;
 		};
@@ -1979,7 +1979,7 @@
 				PREBINDING = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = dyngen;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -2034,7 +2034,7 @@
 				PREBINDING = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = "basic-dyngen-ops";
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 			};
 			name = Debug;
 		};
@@ -2079,7 +2079,7 @@
 				PREBINDING = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = "basic-dyngen-ops";
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 				"SDKROOT[arch=x86_64]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				ZERO_LINK = NO;
 			};
@@ -2126,7 +2126,7 @@
 				PREBINDING = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = "ppc-dyngen-ops";
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 			};
 			name = Debug;
 		};
@@ -2170,7 +2170,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "ppc-dyngen-ops";
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 				"SDKROOT[arch=x86_64]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				ZERO_LINK = NO;
 			};
@@ -2225,7 +2225,7 @@
 				PREBINDING = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = clip;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 			};
 			name = Debug;
 		};
@@ -2256,7 +2256,7 @@
 				PREBINDING = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = clip;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -2265,8 +2265,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1 = x86_64;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -2287,7 +2286,7 @@
 				PREBINDING = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = clip64;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				SDKROOT = macosx10.6;
 			};
 			name = Debug;
 		};
@@ -2295,8 +2294,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1 = x86_64;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -2316,7 +2314,7 @@
 				PREBINDING = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = clip64;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
+				SDKROOT = macosx10.6;
 				ZERO_LINK = NO;
 			};
 			name = Release;
