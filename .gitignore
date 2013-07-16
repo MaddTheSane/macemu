@@ -1,8 +1,18 @@
 # Object files
 *.o
+SheepShaver/src/Unix/SheepShaver.app
 
 # Backups
 *~
 
 # Mac OS X metadata
 *.DS_Store
+
+# Xcode 3 metadata and build files
+*.mode1v3
+*pbxuser
+*build
+
+# Xcode 4 metadata
+*project.xcworkspace
+*xcuserdata
