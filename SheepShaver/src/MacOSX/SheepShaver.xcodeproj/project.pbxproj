@@ -1406,7 +1406,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "gcc -E \"-I${SRCROOT}/config\" \"-I${SRCROOT}/../include\" \"-I${SRCROOT}/../kpx_cpu/include\" \"-I${SRCROOT}/../kpx_cpu/src\" \"-I${SRCROOT}/../Unix\" -DUSE_JIT -DGENEXEC \"${SRCROOT}/../kpx_cpu/src/cpu/ppc/ppc-decode.cpp\" | perl \"${SRCROOT}/../kpx_cpu/src/cpu/ppc/genexec.pl\" > \"${SRCROOT}/../Unix/ppc-execute-impl.cpp\"\n";
+			shellScript = "gcc-4.0 -E -isysroot ${SDKROOT} -mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} \"-I${SRCROOT}/config\" \"-I${SRCROOT}/../include\" \"-I${SRCROOT}/../kpx_cpu/include\" \"-I${SRCROOT}/../kpx_cpu/src\" \"-I${SRCROOT}/../Unix\" -DUSE_JIT -DGENEXEC \"${SRCROOT}/../kpx_cpu/src/cpu/ppc/ppc-decode.cpp\" | perl \"${SRCROOT}/../kpx_cpu/src/cpu/ppc/genexec.pl\" > \"${SRCROOT}/../Unix/ppc-execute-impl.cpp\"\n";
 		};
 		08CD3F3214B665E1009CA2A2 /* Preprocess Info.plist */ = {
 			isa = PBXShellScriptBuildPhase;
