@@ -610,7 +610,7 @@ bool extfs_rename(const char *old_path, const char *new_path)
 const char *convert_string(const char *str, CFStringEncoding from, CFStringEncoding to)
 {
 	const char *ostr = str;
-	CFStringRef cfstr = CFStringCreateWithCString(NULL, str, from);
+	CFStringRef cfstr = CFStringCreateWithCString(kCFAllocatorDefault, str, from);
 	if (cfstr) {
 		static char buffer[MAX_PATH_LENGTH];
 		memset(buffer, 0, sizeof(buffer));

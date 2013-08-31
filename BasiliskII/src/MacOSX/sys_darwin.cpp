@@ -103,10 +103,9 @@ static kern_return_t get_device_path(io_object_t obj, char *path, size_t maxPath
 	if (pathAsCFString) {
 		strcpy(path, "/dev/");
 		size_t pathLength = strlen(path);
-		if (CFStringGetCString((const __CFString *)pathAsCFString,
-							   path + pathLength,
-							   maxPathLength - pathLength,
-							   kCFStringEncodingASCII))
+		if (CFStringGetFileSystemRepresentation((CFStringRef)pathAsCFString,
+												path + pathLength,
+												maxPathLength - pathLength))
 			kernResult = KERN_SUCCESS;
 		CFRelease(pathAsCFString);
 	}
@@ -170,13 +169,13 @@ static void dummy(void *) { };	// stub for dummy runloop source
 static void *media_poll_func(void *)
 {
 	media_poll_loop = CFRunLoopGetCurrent();
-
+	
 	mach_port_t masterPort;
 	kern_return_t kernResult;
 	CFMutableDictionaryRef matchingDictionary;
 	CFRunLoopSourceRef loopSource = NULL;
 	CFRunLoopSourceRef dummySource = NULL;
-
+	
 	if ((kernResult = IOMasterPort(bootstrap_port, &masterPort)) != KERN_SUCCESS)
 		fprintf(stderr, "IOMasterPort() returned %d\n", kernResult);
 	else if ((matchingDictionary = IOServiceMatching(kIOCDMediaClass)) == NULL)
@@ -186,37 +185,37 @@ static void *media_poll_func(void *)
 		IONotificationPortRef notificationPort = IONotificationPortCreate(kIOMasterPortDefault);
 		loopSource = IONotificationPortGetRunLoopSource(notificationPort);
 		CFRunLoopAddSource(media_poll_loop, loopSource, kCFRunLoopDefaultMode);
-
+		
 		io_iterator_t mediaArrivedIterator;
 		kernResult = IOServiceAddMatchingNotification(notificationPort,
-			kIOMatchedNotification,
-			matchingDictionary,
-			(IOServiceMatchingCallback)media_arrived,
-			(void *)MEDIA_CD, &mediaArrivedIterator);
+													  kIOMatchedNotification,
+													  matchingDictionary,
+													  (IOServiceMatchingCallback)media_arrived,
+													  (void *)MEDIA_CD, &mediaArrivedIterator);
 		if (kernResult != KERN_SUCCESS)
 			fprintf(stderr, "IOServiceAddMatchingNotification() returned %d\n", kernResult);
 		media_arrived(MEDIA_CD, mediaArrivedIterator);
-
+		
 		io_iterator_t mediaRemovedIterator;
 		kernResult = IOServiceAddMatchingNotification(notificationPort,
-			kIOTerminatedNotification,
-			matchingDictionary,
-			(IOServiceMatchingCallback)media_removed,
-			(void *)MEDIA_CD, &mediaRemovedIterator);
+													  kIOTerminatedNotification,
+													  matchingDictionary,
+													  (IOServiceMatchingCallback)media_removed,
+													  (void *)MEDIA_CD, &mediaRemovedIterator);
 		if (kernResult != KERN_SUCCESS)
 			fprintf(stderr, "IOServiceAddMatchingNotification() returned %d\n", kernResult);
 		media_removed(MEDIA_CD, mediaRemovedIterator);
 	}
-
+	
 	if (loopSource == NULL) {
 		// add a dummy runloop source to prevent premature return from CFRunLoopRun
 		CFRunLoopSourceContext context = { 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, dummy };
 		dummySource = CFRunLoopSourceCreate(NULL, 0, &context);
 		CFRunLoopAddSource(media_poll_loop, dummySource, kCFRunLoopDefaultMode);
 	}
-
+	
 	CFRunLoopRun();
-
+	
 	if (dummySource != NULL)
 		CFRelease(dummySource);
 	return NULL;
@@ -229,12 +228,12 @@ void DarwinAddFloppyPrefs(void)
 	io_iterator_t			allFloppies;	// List of possible floppys
 	CFMutableDictionaryRef	classesToMatch;
 	io_object_t				nextFloppy;
-
-
+	
+	
 	if ( IOMasterPort(MACH_PORT_NULL, &masterPort) != KERN_SUCCESS )
 		bug("IOMasterPort failed. Won't be able to do anything with floppy drives\n");
-
-
+	
+	
 	// This selects all partitions of all disks
 	classesToMatch = IOServiceMatching(kIOMediaClass); 
 	if ( classesToMatch )
@@ -242,19 +241,19 @@ void DarwinAddFloppyPrefs(void)
 		// Skip drivers and partitions
 		CFDictionarySetValue(classesToMatch,
 							 CFSTR(kIOMediaWholeKey), kCFBooleanTrue); 
-	
+		
 		// Skip fixed drives (hard disks?)
 		CFDictionarySetValue(classesToMatch,
 							 CFSTR(kIOMediaEjectableKey), kCFBooleanTrue); 
 	}
-
+	
 	if ( IOServiceGetMatchingServices(masterPort,
 									  classesToMatch, &allFloppies) != KERN_SUCCESS )
 	{
 		D(bug("IOServiceGetMatchingServices failed. No removable drives found?\n"));
 		return;
 	}
-
+	
 	// Iterate through each floppy
 	while ( nextFloppy = IOIteratorNext(allFloppies))
 	{
@@ -262,16 +261,16 @@ void DarwinAddFloppyPrefs(void)
 		long		size;
 		Boolean gotSize = FALSE;
 		CFTypeRef	sizeAsCFNumber =
-						IORegistryEntryCreateCFProperty(nextFloppy,
-														CFSTR(kIOMediaSizeKey),
-														kCFAllocatorDefault, 0);
-
+		IORegistryEntryCreateCFProperty(nextFloppy,
+										CFSTR(kIOMediaSizeKey),
+										kCFAllocatorDefault, 0);
+		
 		if (sizeAsCFNumber)
 		{
 			gotSize = CFNumberGetValue((CFNumberRef)sizeAsCFNumber, kCFNumberSInt32Type, &size);
 			CFRelease(sizeAsCFNumber);
 		}
-
+		
 		if (gotSize)
 		{
 			D(bug("Got size of %ld\n", size));
@@ -285,14 +284,14 @@ void DarwinAddFloppyPrefs(void)
 			D(puts("Couldn't get kIOMediaSizeKey of device"));
 			continue; // if kIOMediaSizeKey is unavailable, we shouldn't use it anyway
 		}
-
+		
 		if (get_device_path(nextFloppy, bsdPath, sizeof(bsdPath)) == KERN_SUCCESS) {
 			PrefsAddString("floppy", bsdPath);
 		} else {
 			D(bug("Could not get BSD device path for floppy\n"));
 		}
 	}
-
+	
 	IOObjectRelease(nextFloppy);
 	IOObjectRelease(allFloppies);
 }
@@ -304,12 +303,12 @@ void DarwinAddSerialPrefs(void)
 	io_iterator_t			allModems;		// List of modems on the system
 	CFMutableDictionaryRef	classesToMatch;
 	io_object_t				nextModem;
-
-
+	
+	
 	if ( IOMasterPort(MACH_PORT_NULL, &masterPort) != KERN_SUCCESS )
 		bug("IOMasterPort failed. Won't be able to do anything with modems\n");
-
-
+	
+	
     // Serial devices are instances of class IOSerialBSDClient
     classesToMatch = IOServiceMatching(kIOSerialBSDServiceValue);
 	if ( classesToMatch )
@@ -317,59 +316,57 @@ void DarwinAddSerialPrefs(void)
 		// Narrow the search a little further. Each serial device object has
 		// a property with key kIOSerialBSDTypeKey and a value that is one of
 		// kIOSerialBSDAllTypes, kIOSerialBSDModemType, or kIOSerialBSDRS232Type.
-
+		
         CFDictionarySetValue(classesToMatch,
                              CFSTR(kIOSerialBSDTypeKey),
                              CFSTR(kIOSerialBSDModemType));
-
+		
         // This will find built-in and USB modems, but not serial modems.
 	}
-
+	
 	if ( IOServiceGetMatchingServices(masterPort,
 									  classesToMatch, &allModems) != KERN_SUCCESS )
 	{
 		D(bug("IOServiceGetMatchingServices failed. No modems found?\n"));
 		return;
 	}
-
+	
 	// Iterate through each modem
 	while ( nextModem = IOIteratorNext(allModems))
 	{
 		char		bsdPath[MAXPATHLEN];
 		CFTypeRef	bsdPathAsCFString =
-						IORegistryEntryCreateCFProperty(nextModem,
-														CFSTR(kIOCalloutDeviceKey),
-														// kIODialinDeviceKey?
-														kCFAllocatorDefault, 0);
+		IORegistryEntryCreateCFProperty(nextModem,
+										CFSTR(kIOCalloutDeviceKey),
+										// kIODialinDeviceKey?
+										kCFAllocatorDefault, 0);
 		*bsdPath = '\0';
 		if ( bsdPathAsCFString )
 		{
-			if ( CFStringGetCString((const __CFString *)bsdPathAsCFString,
-									 bsdPath, MAXPATHLEN,
-									 kCFStringEncodingASCII) )
+			if ( CFStringGetFileSystemRepresentation((CFStringRef)bsdPathAsCFString, bsdPath, MAXPATHLEN) )
 			{
 				D(bug("Modem BSD path: %s\n", bsdPath));
-
+				
 				// Note that if there are multiple modems, we only get the last
 				PrefsAddString("seriala", bsdPath);
 			}
 			else
 				D(bug("Could not get BSD device path for modem\n"));
-
+			
 			CFRelease(bsdPathAsCFString);
 		}
 		else
 			D(puts("Cannot determine bsdPath for modem\n"));
 	}
-
+	
 	IOObjectRelease(nextModem);
 	IOObjectRelease(allModems);
-
-
+	
+	
 	// Getting a printer device is a bit harder. Creating a fake device
 	// that emulates a simple printer (e.g. a HP DeskJet) is one possibility,
 	// but for now I will just create a fake, safe, device entry:
-
+	
 	PrefsAddString("serialb", "/dev/null");
 }
 
@@ -383,20 +380,20 @@ bool DarwinCDReadTOC(char *name, uint8 *toc)
 {
 	char				*c, *devname;
 	int					fd;
-
-
+	
+	
 	// The open filehandle is something like /dev/disk5s1
 	// The DKIOCCDREADTOC ioctl needs the original cd file,
 	// so we strip the s1 suffix off it, and open the file just for this ioctl
-
+	
 	devname = strdup(name);
 	if ( ! devname )
 		return false;
-
+	
 	for ( c = devname; *c; ++c ) ;	// Go to the end of the name,
 	--c, --c;						// point to the 's1' on the end,
 	*c = '\0';						// and truncate the string
-
+	
 	fd = open(devname, O_RDONLY);
 	if ( ! fd )
 	{
@@ -404,18 +401,18 @@ bool DarwinCDReadTOC(char *name, uint8 *toc)
 		free(devname);
 		return false;
 	}
-
+	
 	D(bug("Opened %s for ioctl()\n", devname));
-
+	
 	dk_cd_read_toc_t	TOCrequest;
-
+	
 	// Setup the ioctl request structure:
-
+	
 	memset(&TOCrequest, 0, sizeof(TOCrequest));
 	TOCrequest.buffer = toc;
 	TOCrequest.bufferLength = 804;
 	TOCrequest.formatAsTime = kCDTrackInfoAddressTypeTrackNumber;
-
+	
 	if ( ioctl(fd, DKIOCCDREADTOC, &TOCrequest) < 0 )
 	{
 		printf("ioctl(DKIOCCDREADTOC) failed: %s\n", strerror(errno));
@@ -426,13 +423,13 @@ bool DarwinCDReadTOC(char *name, uint8 *toc)
 	if ( TOCrequest.bufferLength < sizeof(CDTOC) )
 	{
 		printf("ioctl(DKIOCCDREADTOC): only read %d bytes (a CDTOC is at least %d)\n",
-											TOCrequest.bufferLength, (int)sizeof(CDTOC));
+			   TOCrequest.bufferLength, (int)sizeof(CDTOC));
 		close(fd);
 		free(devname);
 		return false;
 	}
 	D(bug("ioctl(DKIOCCDREADTOC) read %d bytes\n", TOCrequest.bufferLength));
-
+	
 	close(fd);
 	free(devname);
 	return true;
