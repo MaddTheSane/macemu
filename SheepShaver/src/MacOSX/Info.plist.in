@@ -1,25 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
-	<key>CFBundleExecutable</key>
-	<string>SheepShaver</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>@PACKAGE_VERSION@</string>
-	<key>CFBundleShortVersionString</key>
-	<string>@PACKAGE_VERSION@</string>
-	<key>CFBundleIconFile</key>
-	<string>SheepShaver.icns</string>
-	<key>CSResourcesFileMapped</key>
-	<true/>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -28,7 +12,7 @@
 				<string>sheepvm</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>SheepShaver.icns</string>
+			<string>SheepShaver</string>
 			<key>CFBundleTypeName</key>
 			<string>SheepShaver VM</string>
 			<key>CFBundleTypeRole</key>
@@ -37,20 +21,30 @@
 			<true/>
 		</dict>
 	</array>
-	<key>LSArchitecturePriority</key>
-	<array>
-		<string>i386</string>
-		<string>x86_64</string>
-		<string>ppc</string>
-	</array>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIconFile</key>
+	<string>SheepShaver</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.github.macemu.${PRODUCT_NAME:rfc1034identifier}</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>@PACKAGE_VERSION@</string>
+	<key>CFBundleSignature</key>
+	<string>Shee</string>
+	<key>CFBundleVersion</key>
+	<string>@PACKAGE_VERSION@</string>
 	<key>LSMinimumSystemVersionByArchitecture</key>
 	<dict>
 		<key>i386</key>
 		<string>10.4.0</string>
-		<key>x86_64</key>
-		<string>10.6.0</string>
 		<key>ppc</key>
 		<string>10.4.0</string>
+		<key>x86_64</key>
+		<string>10.6.0</string>
 	</dict>
 </dict>
 </plist>
