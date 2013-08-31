@@ -151,13 +151,13 @@ typedef long int32;
 #if SIZEOF_LONG == 8
 typedef unsigned long uint64;
 typedef long int64;
-#define _UINT64 1
+#define _UINT64
 #define VAL64(a) (a ## l)
 #define UVAL64(a) (a ## ul)
 #elif SIZEOF_LONG_LONG == 8
 typedef unsigned long long uint64;
 typedef long long int64;
-#define _UINT64 1
+#define _UINT64
 #define VAL64(a) (a ## LL)
 #define UVAL64(a) (a ## uLL)
 #else
