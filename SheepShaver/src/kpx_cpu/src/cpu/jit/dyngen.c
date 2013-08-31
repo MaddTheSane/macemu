@@ -2087,7 +2087,7 @@ void gen_code(const char *name, const char *demangled_name,
 
                     if (val >= start_offset && val < start_offset + copy_size) {
                         n = strtol(p, NULL, 10);
-                        fprintf(outfile, "    label_offsets[%d] = %d + (code_ptr() - gen_code_buf);\n", n, val - start_offset);
+                        fprintf(outfile, "    label_offsets[%d] = %lld + (code_ptr() - gen_code_buf);\n", n, (unsigned long long)(val - start_offset));
                     }
                 }
             }
@@ -2923,9 +2923,9 @@ int gen_file(FILE *outfile, int out_type)
 				if (data == NULL)
 					error("no .data section found");
 #ifdef CONFIG_FORMAT_MACH
-				fprintf(outfile, "DEFINE_CST(%s,0x%xL)\n\n", name, *((host_ulong *)(data + sym->st_value - data_sec_hdr->addr)));
+				fprintf(outfile, "DEFINE_CST(%s,0x%lxL)\n\n", name, (unsigned long)*((host_ulong *)(data + sym->st_value - data_sec_hdr->addr)));
 #else
-				fprintf(outfile, "DEFINE_CST(%s,0x%xL)\n\n", name, *((host_ulong *)(data + sym->st_value)));
+				fprintf(outfile, "DEFINE_CST(%s,0x%lxL)\n\n", name, *((host_ulong *)(data + sym->st_value)));
 #endif
 			}
 			else if (strstart(name, OP_PREFIX "invoke", NULL)) {
