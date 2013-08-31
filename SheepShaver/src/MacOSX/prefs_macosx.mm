@@ -81,17 +81,17 @@
 
 - (void) openPreferences:(id)sender
 {
-	AUTORELEASE_POOL_START
-	if (nibObjects == nil) {
-		nibObjects = [self loadPrefsNibFile];
-		if (nibObjects == nil)
-			return;
-		[nibObjects retain];
+	AUTORELEASE_POOL {
+		if (nibObjects == nil) {
+			nibObjects = [self loadPrefsNibFile];
+			if (nibObjects == nil)
+				return;
+			[nibObjects retain];
+		}
+		
+		[[VMSettingsController sharedInstance] setupGUI];
+		[NSApp runModalForWindow:prefsWindow];
 	}
-	
-	[[VMSettingsController sharedInstance] setupGUI];
-	[NSApp runModalForWindow:prefsWindow];
-	AUTORELEASE_POOL_STOP
 }
 
 @end
@@ -102,18 +102,18 @@
 
 void prefs_init(void)
 {
-	AUTORELEASE_POOL_START
-	NSMenu *appMenu;
-	NSMenuItem *menuItem;
-	
-	appMenu = [[[NSApp mainMenu] itemAtIndex:0] submenu];
-	menuItem = [[NSMenuItem alloc] initWithTitle:@"Preferences..." action:@selector(openPreferences:) keyEquivalent:@","];
-	[appMenu insertItem:menuItem atIndex:2];
-	[appMenu insertItem:[NSMenuItem separatorItem] atIndex:3];
-	[menuItem release];
-	
-	[NSApp setDelegate:[[SheepShaverMain alloc] init]];
-	AUTORELEASE_POOL_STOP
+	AUTORELEASE_POOL {
+		NSMenu *appMenu;
+		NSMenuItem *menuItem;
+		
+		appMenu = [[[NSApp mainMenu] itemAtIndex:0] submenu];
+		menuItem = [[NSMenuItem alloc] initWithTitle:@"Preferences..." action:@selector(openPreferences:) keyEquivalent:@","];
+		[appMenu insertItem:menuItem atIndex:2];
+		[appMenu insertItem:[NSMenuItem separatorItem] atIndex:3];
+		[menuItem release];
+		
+		[NSApp setDelegate:[[SheepShaverMain alloc] init]];
+	}
 }
 
 
