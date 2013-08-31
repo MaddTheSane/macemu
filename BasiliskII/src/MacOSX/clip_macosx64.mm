@@ -597,7 +597,7 @@ static NSAttributedString *AttributedStringFromMacTEXTAndStyl(NSData *textData, 
 
 	NSUInteger cursor = 2;
 
-	for (NSUInteger i = 0; i < elements; i++) AUTORELEASE_POOL {
+	for (NSUInteger i = 0; i < elements; i++) AUTORELEASE_POOL_START {
 		int32_t startChar = CFSwapInt32BigToHost(*(int32_t *)(bytes + cursor)); cursor += 4;
 		int16_t height __attribute__((unused)) = CFSwapInt16BigToHost(*(int16_t *)&bytes[cursor]); cursor += 2;
 		int16_t ascent __attribute__((unused)) = CFSwapInt16BigToHost(*(int16_t *)&bytes[cursor]); cursor += 2;
@@ -607,19 +607,19 @@ static NSAttributedString *AttributedStringFromMacTEXTAndStyl(NSData *textData, 
 		uint16_t red = CFSwapInt16BigToHost(*(int16_t *)&bytes[cursor]); cursor += 2;
 		uint16_t green = CFSwapInt16BigToHost(*(int16_t *)&bytes[cursor]); cursor += 2;
 		uint16_t blue = CFSwapInt16BigToHost(*(int16_t *)&bytes[cursor]); cursor += 2;
-
+		
 		int32_t nextChar;
-
+		
 		if (i + 1 == elements)
 			nextChar = [textData length];
 		else
 			nextChar = CFSwapInt32BigToHost(*(int32_t *)(bytes + cursor));
-
+		
 		NSMutableDictionary *attrs = [[NSMutableDictionary alloc] init];
 		NSColor *color = [NSColor colorWithDeviceRed:(CGFloat)red / 65535.0 green:(CGFloat)green / 65535.0 blue:(CGFloat)blue / 65535.0 alpha:1.0];
 		NSFont *font;
 		TextEncoding encoding;
-
+		
 		if (fontID == 0) {			// System font
 			CGFloat fontSize = (size == 0) ? [NSFont systemFontSize] : (CGFloat)size;
 			font = [NSFont systemFontOfSize:fontSize];
@@ -628,77 +628,78 @@ static NSAttributedString *AttributedStringFromMacTEXTAndStyl(NSData *textData, 
 		} else {
 			NSString *fontName = FontNameFromFontID(fontID);
 			font = [NSFont fontWithName:fontName size:(CGFloat)size];
-
+			
 			if (font == nil) {
 				// Convert localized variants of fonts; e.g. "Helvetica CE" to "Helvetica"
-
+				
 				NSRange wsRange = [fontName rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet] options:NSBackwardsSearch];
-
+				
 				if (wsRange.length) {
 					fontName = [fontName substringToIndex:wsRange.location];
 					font = [NSFont fontWithName:fontName size:(CGFloat)size];
 				}
 			}
 		}
-
+		
 		if (font == nil)
 			font = [NSFont userFontOfSize:(CGFloat)size];
-
+		
 		if (UpgradeScriptInfoToTextEncoding(ScriptNumberForFontID(fontID), kTextLanguageDontCare, kTextRegionDontCare, NULL, &encoding))
 			encoding = MacDefaultTextEncoding();
-
+		
 		NSFontManager *fm = [NSFontManager sharedFontManager];
-
+		
 		if (face & FONT_FACE_BOLD)
 			font = [fm convertFont:font toHaveTrait:NSBoldFontMask];
-
+		
 		if (face & FONT_FACE_ITALIC)
 			font = [fm convertFont:font toHaveTrait:NSItalicFontMask];
-
+		
 		if (face & FONT_FACE_CONDENSED)
 			font = [fm convertFont:font toHaveTrait:NSCondensedFontMask];
-
+		
 		if (face & FONT_FACE_EXTENDED)
 			font = [fm convertFont:font toHaveTrait:NSExpandedFontMask];
-
+		
 		[attrs setObject:font forKey:NSFontAttributeName];
-
+		
 		if (face & FONT_FACE_UNDERLINE)
 			[attrs setObject:[NSNumber numberWithInteger:NSUnderlineStyleSingle] forKey:NSUnderlineStyleAttributeName];
-
+		
 		if (face & FONT_FACE_OUTLINE) {
 			[attrs setObject:color forKey:NSStrokeColorAttributeName];
 			[attrs setObject:[NSNumber numberWithInteger:3] forKey:NSStrokeWidthAttributeName];
 		}
-
+		
 		if (face & FONT_FACE_SHADOW) {
 			NSShadow *shadow = [[NSShadow alloc] init];
 			NSColor *shadowColor = [NSColor colorWithDeviceRed:(CGFloat)red / 65535.0 green:(CGFloat)green / 65535.0 blue:(CGFloat)blue / 65535.0 alpha:0.5];
-
+			
 			[shadow setShadowColor:shadowColor];
 			[shadow setShadowOffset:NSMakeSize(2, -2.0)];
-
+			
 			[attrs setObject:shadow forKey:NSShadowAttributeName];
-
+			
 			[shadow release];
 		}
-
+		
 		[attrs setObject:color forKey:NSForegroundColorAttributeName];
-
+		
 		NSData *partialData = [textData subdataWithRange:NSMakeRange(startChar, nextChar - startChar)];
 		NSString *partialString = [[NSString alloc] initWithData:partialData encoding:CFStringConvertEncodingToNSStringEncoding(encoding)];
-
+		
 		if (partialString) {
 			NSAttributedString *partialAttribString = [[NSAttributedString alloc] initWithString:partialString attributes:attrs];
-
+			
 			[aStr appendAttributedString:partialAttribString];
-
+			
 			[partialAttribString release];
 		}
-
+		
 		[partialString release];
 		[attrs release];
 	}
+	AUTORELEASE_POOL_STOP
 
 	return aStr;
 }
@@ -1163,45 +1164,46 @@ static void ConvertHostPasteboardToMacScrap()
 static void ConvertMacScrapToHostPasteboard()
 {
 	D(bug("ConvertMacScrapToHostPasteboard\n"));
-
+	
 	BOOL wroteText = NO;
-
+	
 	[g_pboard clearContents];
-
-	for (NSNumber *eachTypeNum in g_macScrap) AUTORELEASE_POOL {
-		uint32_t eachType = [eachTypeNum integerValue];
-
+	
+	for (NSNumber *eachTypeNum in g_macScrap) AUTORELEASE_POOL_START {
+		uint32_t eachType = [eachTypeNum unsignedIntValue];
+		
 		if (eachType == TYPE_TEXT || eachType == TYPE_STYL || eachType == TYPE_UTXT || eachType == TYPE_UT16 || eachType == TYPE_USTL) {
 			if (wroteText)
 				continue;
-
+			
 			NSData *textData;
 			NSData *stylData;
-
-			textData = [g_macScrap objectForKey:[NSNumber numberWithInteger:TYPE_TEXT]];
-			stylData = [g_macScrap objectForKey:[NSNumber numberWithInteger:TYPE_STYL]];
-
+			
+			textData = [g_macScrap objectForKey:[NSNumber numberWithUnsignedInt:TYPE_TEXT]];
+			stylData = [g_macScrap objectForKey:[NSNumber numberWithUnsignedInt:TYPE_STYL]];
+			
 			if (textData) {
 				WriteMacTEXTAndStylToPasteboard(g_pboard, textData, stylData);
 				wroteText = YES;
 			}
-
+			
 			// sometime, it might be interesting to write a converter for utxt/ustl if possible
-
+			
 			continue;
 		}
-
+		
 		NSData *pbData = [g_macScrap objectForKey:eachTypeNum];
-
+		
 		if (pbData) {
 			NSString *typeStr = UTIForFlavor(eachType);
-
+			
 			if (!typeStr)
 				continue;
-
+			
 			[g_pboard setData:pbData forType:typeStr];
 		}
 	}
+	AUTORELEASE_POOL_STOP
 }
 
 /*

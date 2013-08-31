@@ -197,7 +197,7 @@ static void setupWindowMenu(void)
 /* Replacement for NSApplicationMain */
 static void CustomApplicationMain (int argc, char **argv)
 {
-    NSAutoreleasePool	*pool = [[NSAutoreleasePool alloc] init];
+    NSAutoreleasePool	*pool = [NSAutoreleasePool new];
     SDLMain				*sdlMain;
 
     /* Ensure the application object is initialised */

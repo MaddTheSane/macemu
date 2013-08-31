@@ -20,18 +20,19 @@
  *	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#import <Foundation/Foundation.h>
-
 #ifndef __Autorelease_H__
 #define __Autorelease_H__
+
+#import <Foundation/Foundation.h>
 
 // just a little forward compatibility in case we ever support LLVM/clang
 #if __clang__
 #define AUTORELEASE_POOL @autoreleasepool
+#define AUTORELEASE_POOL_START @autoreleasepool {
 #else
 class Autorelease_Pool_Wrapper {
 public:
-	Autorelease_Pool_Wrapper() { m_pool = [[NSAutoreleasePool alloc] init]; }
+	Autorelease_Pool_Wrapper() { m_pool = [NSAutoreleasePool new]; }
 	~Autorelease_Pool_Wrapper() { [m_pool drain]; }
 	operator bool() const { return true; }
 private:
@@ -41,6 +42,10 @@ private:
 #define POOL_NAME(x, y) x##_##y
 #define POOL_NAME2(x, y) POOL_NAME(x, y)
 #define AUTORELEASE_POOL if(Autorelease_Pool_Wrapper POOL_NAME2(pool, __LINE__) = Autorelease_Pool_Wrapper())
+#define AUTORELEASE_POOL_START {\
+Autorelease_Pool_Wrapper POOL_NAME2(pool, __LINE__) = Autorelease_Pool_Wrapper();
 #endif // !__clang__
+
+#define AUTORELEASE_POOL_STOP }
 
 #endif // __Autorelease_H__

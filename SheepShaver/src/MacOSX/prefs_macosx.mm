@@ -27,9 +27,9 @@
 // The _UINT64 define is needed to guard against a typedef mismatch with Snow Leopard headers.
 #define _UINT64
 
-#include <Cocoa/Cocoa.h>
-#include "VMSettingsController.h"
-
+#import <Cocoa/Cocoa.h>
+#import "VMSettingsController.h"
+#import "autorelease.h"
 
 @interface SheepShaverMain : NSObject
 {
@@ -81,18 +81,17 @@
 
 - (void) openPreferences:(id)sender
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
+	AUTORELEASE_POOL_START
 	if (nibObjects == nil) {
 		nibObjects = [self loadPrefsNibFile];
 		if (nibObjects == nil)
 			return;
 		[nibObjects retain];
 	}
-
+	
 	[[VMSettingsController sharedInstance] setupGUI];
 	[NSApp runModalForWindow:prefsWindow];
-	[pool drain];
+	AUTORELEASE_POOL_STOP
 }
 
 @end
@@ -103,10 +102,10 @@
 
 void prefs_init(void)
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	AUTORELEASE_POOL_START
 	NSMenu *appMenu;
 	NSMenuItem *menuItem;
-
+	
 	appMenu = [[[NSApp mainMenu] itemAtIndex:0] submenu];
 	menuItem = [[NSMenuItem alloc] initWithTitle:@"Preferences..." action:@selector(openPreferences:) keyEquivalent:@","];
 	[appMenu insertItem:menuItem atIndex:2];
@@ -114,8 +113,7 @@ void prefs_init(void)
 	[menuItem release];
 	
 	[NSApp setDelegate:[[SheepShaverMain alloc] init]];
-
-	[pool drain];
+	AUTORELEASE_POOL_STOP
 }
 
 

@@ -20,7 +20,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface VMSettingsController : NSWindowController
+@interface VMSettingsController : NSWindowController <NSTableViewDataSource>
 {
     BOOL cancelWasClicked;
 
