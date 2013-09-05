@@ -22,11 +22,11 @@
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
+	<string>SheepShaver</string>
 	<key>CFBundleIconFile</key>
 	<string>SheepShaver</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.github.cebix.macemu.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.github.cebix.macemu.sheepshaver</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
