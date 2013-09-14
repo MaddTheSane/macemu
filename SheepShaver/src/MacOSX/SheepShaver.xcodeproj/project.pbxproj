@@ -1962,7 +1962,6 @@
 					"\"$(SRCROOT)\"/../kpx_cpu/include",
 					"\"$(SRCROOT)\"/../include",
 				);
-				INFOPLIST_EXPAND_BUILD_SETTINGS = NO;
 				INFOPLIST_FILE = Info.plist.in;
 				INFOPLIST_PREPROCESS = NO;
 				INSTALL_PATH = "$(HOME)/Applications";
