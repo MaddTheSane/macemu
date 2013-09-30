@@ -64,20 +64,18 @@
 }
 
 + (id) sharedInstance;
-- (id) init;
-- (void) setupGUI;
-- (void) editSettingsFor: (NSString *) vmdir sender: (id) sender;
-- (void) editSettingsForNewVM: (NSString *) vmdir sender: (id) sender;
-- (IBAction) addDisk: (id) sender;
-- (IBAction) removeDisk: (id) sender;
-- (IBAction) createDisk: (id) sender;
-- (IBAction) useRawKeyCodesClicked: (id) sender;
-- (IBAction) browseForROMFileClicked: (id) sender;
-- (IBAction) browseForUnixRootClicked: (id) sender;
-- (IBAction) browseForKeyCodesFileClicked: (id) sender;
-- (void) cancelEdit: (id) sender;
-- (void) saveChanges: (id) sender;
-- (BOOL) cancelWasClicked;
-- (void) dealloc;
+- (void)setupGUI;
+- (void)editSettingsFor:(NSString *)vmdir sender:(id)sender;
+- (void)editSettingsForNewVM:(NSString *)vmdir sender:(id)sender;
+- (IBAction)addDisk:(id)sender;
+- (IBAction)removeDisk:(id)sender;
+- (IBAction)createDisk:(id)sender;
+- (IBAction)useRawKeyCodesClicked:(id)sender;
+- (IBAction)browseForROMFileClicked:(id)sender;
+- (IBAction)browseForUnixRootClicked:(id)sender;
+- (IBAction)browseForKeyCodesFileClicked:(id)sender;
+- (void)cancelEdit:(id)sender;
+- (void)saveChanges:(id)sender;
+- (BOOL)cancelWasClicked;
 
 @end

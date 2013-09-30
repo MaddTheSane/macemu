@@ -41,7 +41,7 @@
 @implementation SheepShaverMain
 
 
-- (NSArray*) loadPrefsNibFile
+- (NSArray*)loadPrefsNibFile
 {
 	NSNib *nib = [[NSNib alloc] initWithNibNamed:@"VMSettingsWindow" bundle:nil];
 	NSArray *objects = nil;
@@ -79,7 +79,7 @@
 }
 
 
-- (void) openPreferences:(id)sender
+- (void)openPreferences:(id)sender
 {
 	AUTORELEASE_POOL {
 		if (nibObjects == nil) {

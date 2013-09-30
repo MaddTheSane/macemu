@@ -42,7 +42,7 @@ void prefs_exit()
 
 @implementation VMSettingsController
 
-+ (id) sharedInstance
++ (id)sharedInstance
 {
   static VMSettingsController *_sharedInstance = nil;
   if (!_sharedInstance) {
@@ -51,21 +51,20 @@ void prefs_exit()
   return _sharedInstance;
 }
 
-- (id) init
+- (id)init
 {
-  self = [super initWithWindowNibName:@"VMSettingsWindow"];
-
-  cancelWasClicked = NO;
-
+  if (self = [super initWithWindowNibName:@"VMSettingsWindow"]) {
+    cancelWasClicked = NO;
+  }
   return self;
 }
 
-- (NSInteger) numberOfRowsInTableView: (NSTableView *) table
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)table
 {
   return [diskArray count];
 }
 
-- (id) tableView: (NSTableView *) table objectValueForTableColumn: (NSTableColumn *) col row: (NSInteger) row
+- (id)tableView:(NSTableView *)table objectValueForTableColumn:(NSTableColumn *)col row:(NSInteger)row
 {
   return [diskArray objectAtIndex: row];
 }
@@ -78,7 +77,7 @@ static NSString *getStringFromPrefs(const char *key)
   return [NSString stringWithUTF8String: value];
 }
 
-- (void) setupGUI
+- (void)setupGUI
 {
   diskArray = [[NSMutableArray alloc] init];
 
@@ -165,7 +164,7 @@ static NSString *getStringFromPrefs(const char *key)
   [ethernetInterface setStringValue: getStringFromPrefs("ether") ];
 }
 
-- (void) editSettingsFor: (NSString *) vmdir sender: (id) sender
+- (void)editSettingsFor:(NSString *)vmdir sender:(id)sender
 {
   chdir([vmdir fileSystemRepresentation]);
   AddPrefsDefaults();
@@ -176,7 +175,7 @@ static NSString *getStringFromPrefs(const char *key)
   [NSApp runModalForWindow:window];
 }
 
-- (void) editSettingsForNewVM: (NSString *) vmdir sender: (id) sender
+- (void)editSettingsForNewVM:(NSString *)vmdir sender:(id)sender
 {
   chdir([vmdir fileSystemRepresentation]);
   AddPrefsDefaults();
@@ -208,7 +207,7 @@ static NSString *makeRelativeIfNecessary(NSString *path)
   return path;
 }
 
-- (IBAction) addDisk: (id) sender
+- (IBAction)addDisk:(id)sender
 {
   NSOpenPanel *open = [NSOpenPanel openPanel];
   [open setCanChooseDirectories:YES];
@@ -218,11 +217,11 @@ static NSString *makeRelativeIfNecessary(NSString *path)
                           file: @"Unknown"
                 modalForWindow: [self window]
                  modalDelegate: self
-                didEndSelector: @selector(_addDiskEnd: returnCode: contextInfo:)
+                didEndSelector: @selector(_addDiskEnd:returnCode:contextInfo:)
                    contextInfo: nil];
 }
 
-- (void) _addDiskEnd: (NSOpenPanel *) open returnCode: (int) theReturnCode contextInfo: (void *) theContextInfo
+- (void)_addDiskEnd:(NSOpenPanel *)open returnCode:(int)theReturnCode contextInfo:(void *)theContextInfo
 {
   if (theReturnCode == NSOKButton) {
     [diskArray addObject: makeRelativeIfNecessary([open filename])];
@@ -230,7 +229,7 @@ static NSString *makeRelativeIfNecessary(NSString *path)
   }
 }
 
-- (IBAction) removeDisk: (id) sender
+- (IBAction)removeDisk:(id)sender
 {
   int selectedRow = [disks selectedRow];
   if (selectedRow >= 0) {
@@ -239,7 +238,7 @@ static NSString *makeRelativeIfNecessary(NSString *path)
   }
 }
 
-- (IBAction) createDisk: (id) sender
+- (IBAction)createDisk:(id)sender
 {
   NSSavePanel *save = [NSSavePanel savePanel];
   [save setAccessoryView: diskSaveSize];
@@ -248,11 +247,11 @@ static NSString *makeRelativeIfNecessary(NSString *path)
                           file: @"New.dsk"
                 modalForWindow: [self window]
                  modalDelegate: self
-                didEndSelector: @selector(_createDiskEnd: returnCode: contextInfo:)
+                didEndSelector: @selector(_createDiskEnd:returnCode:contextInfo:)
                    contextInfo: nil];
 }
 
-- (void) _createDiskEnd: (NSSavePanel *) save returnCode: (int) theReturnCode contextInfo: (void *) theContextInfo
+- (void)_createDiskEnd:(NSSavePanel *)save returnCode:(int)theReturnCode contextInfo:(void *)theContextInfo
 {
   if (theReturnCode == NSOKButton) {
     int size = [diskSaveSizeField intValue];
@@ -269,34 +268,34 @@ static NSString *makeRelativeIfNecessary(NSString *path)
   [(NSData *)theContextInfo release];
 }
 
-- (IBAction) useRawKeyCodesClicked: (id) sender
+- (IBAction)useRawKeyCodesClicked:(id)sender
 {
   [rawKeyCodes setEnabled:[useRawKeyCodes intValue]];
   [browseRawKeyCodesButton setEnabled:[useRawKeyCodes intValue]];
 }
 
-- (IBAction) browseForROMFileClicked: (id) sender
+- (IBAction)browseForROMFileClicked:(id)sender
 {
   NSOpenPanel *open = [NSOpenPanel openPanel];
   [open setCanChooseDirectories:NO];
   [open setAllowsMultipleSelection:NO];
   [open setTreatsFilePackagesAsDirectories:YES];
-  [open beginSheetForDirectory: @""
+  [open beginSheetForDirectory: NSHomeDirectory()
                           file: [romFile stringValue]
                 modalForWindow: [self window]
                  modalDelegate: self
-                didEndSelector: @selector(_browseForROMFileEnd: returnCode: contextInfo:)
+                didEndSelector: @selector(_browseForROMFileEnd:returnCode:contextInfo:)
                    contextInfo: nil];
 }
 
-- (void) _browseForROMFileEnd: (NSOpenPanel *) open returnCode: (int) theReturnCode contextInfo: (void *) theContextInfo
+- (void)_browseForROMFileEnd:(NSOpenPanel *)open returnCode:(int)theReturnCode contextInfo:(void *)theContextInfo
 {
   if (theReturnCode == NSOKButton) {
     [romFile setStringValue: makeRelativeIfNecessary([open filename])];
   }
 }
 
-- (IBAction) browseForUnixRootClicked: (id) sender
+- (IBAction)browseForUnixRootClicked:(id)sender
 {
   NSOpenPanel *open = [NSOpenPanel openPanel];
   [open setCanChooseDirectories:YES];
@@ -306,18 +305,18 @@ static NSString *makeRelativeIfNecessary(NSString *path)
                           file: [unixRoot stringValue]
                 modalForWindow: [self window]
                  modalDelegate: self
-                didEndSelector: @selector(_browseForUnixRootEnd: returnCode: contextInfo:)
+                didEndSelector: @selector(_browseForUnixRootEnd:returnCode:contextInfo:)
                    contextInfo: nil];
 }
 
-- (void) _browseForUnixRootEnd: (NSOpenPanel *) open returnCode: (int) theReturnCode contextInfo: (void *) theContextInfo
+- (void)_browseForUnixRootEnd:(NSOpenPanel *)open returnCode:(int)theReturnCode contextInfo:(void *)theContextInfo
 {
   if (theReturnCode == NSOKButton) {
     [unixRoot setStringValue: makeRelativeIfNecessary([open filename])];
   }
 }
 
-- (IBAction) browseForKeyCodesFileClicked: (id) sender
+- (IBAction)browseForKeyCodesFileClicked:(id)sender
 {
   NSOpenPanel *open = [NSOpenPanel openPanel];
   [open setCanChooseDirectories:NO];
@@ -331,24 +330,24 @@ static NSString *makeRelativeIfNecessary(NSString *path)
                    contextInfo: nil];
 }
 
-- (void) _browseForKeyCodesFileEnd: (NSOpenPanel *) open returnCode: (int) theReturnCode contextInfo: (void *) theContextInfo
+- (void)_browseForKeyCodesFileEnd:(NSOpenPanel *)open returnCode:(int)theReturnCode contextInfo:(void *)theContextInfo
 {
   if (theReturnCode == NSOKButton) {
     [rawKeyCodes setStringValue: makeRelativeIfNecessary([open filename])];
   }
 }
 
-- (void) cancelEdit: (id) sender
+- (void)cancelEdit:(id)sender
 {
 #ifdef STANDALONE_PREFS
   PrefsExit();
 #endif
-  [[self window] close];
+  [self close];
   [NSApp stopModal];
   cancelWasClicked = YES;
 }
 
-- (void) saveChanges: (id) sender
+- (void)saveChanges:(id)sender
 {
   while (PrefsFindString("disk"))
     PrefsRemoveItem("disk");
@@ -403,20 +402,21 @@ static NSString *makeRelativeIfNecessary(NSString *path)
   PrefsExit();
 #endif
 
-  [[self window] close];
+  [self close];
   [NSApp stopModal];
   cancelWasClicked = NO;
 }
 
-- (BOOL) cancelWasClicked
+- (BOOL)cancelWasClicked
 {
   return cancelWasClicked;
 }
 
-- (void) dealloc
+- (void)dealloc
 {
+  [diskArray release];
+  
   [super dealloc];
 }
 
 @end
-
