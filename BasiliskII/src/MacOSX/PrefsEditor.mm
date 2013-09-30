@@ -494,8 +494,8 @@ shouldProceedAfterError: (NSDictionary *) errorDict
 													handler: self] )
 	{
 		WarningSheet(@"Unable to delete volume", panel);
-		NSLog(@"%s unlink(%s) failed - %s", __PRETTY_FUNCTION__,
-									[Path cString], strerror(errno));
+		NSLog(@"%s unlink(%@) failed - %s", __PRETTY_FUNCTION__,
+									Path , strerror(errno));
 	}
 }
 
@@ -606,7 +606,7 @@ shouldProceedAfterError: (NSDictionary *) errorDict
 	if ( row != -1 )
 	{
 		NSString	*Path = [volsDS pathAtRow: row];
-		const char	*path = [Path UTF8String],
+		const char	*path = [Path fileSystemRepresentation],
 					*str;
 		int			tmp = 0;
 
@@ -614,7 +614,7 @@ shouldProceedAfterError: (NSDictionary *) errorDict
 							   "Are you sure you want to delete the file",
 							   path];
 
-		if ( ! ChoiceAlert([prompt cString], "Delete", "Cancel") )
+		if ( ! ChoiceAlert([prompt UTF8String], "Delete", "Cancel") )
 			return NULL;
 
 		while ( (str = PrefsFindString("disk", tmp) ) != NULL )
@@ -814,7 +814,8 @@ shouldProceedAfterError: (NSDictionary *) errorDict
 		sprintf (pref, "scsi%d", tmp);
 		if ( (str = PrefsFindString(pref, 0) ) )
 			[SCSIds addInt: tmp
-				  withPath: [NSString stringWithCString: str] ];
+				  withPath:  [[NSFileManager defaultManager] 
+				  stringWithFileSystemRepresentation:str length:strlen(str)] ];
 	}
 
 	[SCSIdisks setDataSource: SCSIds];
