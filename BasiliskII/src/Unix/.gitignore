@@ -1,6 +1,9 @@
 # Object files
 obj/*
 BasiliskII
+BasiliskII.app
+Darwin/lowmem
+Darwin/pagezero
 
 # Autotools generated files
 Makefile
