@@ -72,7 +72,9 @@ static sigsegv_fault_handler_t sigsegv_fault_handler = 0;
 static sigsegv_state_dumper_t sigsegv_state_dumper = 0;
 
 // Actual SIGSEGV handler installer
+#if defined(HAVE_SIGINFO_T)
 static bool sigsegv_do_install_handler(int sig);
+#endif
 
 
 /*
