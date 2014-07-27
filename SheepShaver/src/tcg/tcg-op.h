@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 #include "tcg.h"
-#include "exec/helper-proto.h"
-#include "exec/helper-gen.h"
+//#include "exec/helper-proto.h"
+//#include "exec/helper-gen.h"
 
 int gen_new_label(void);
 

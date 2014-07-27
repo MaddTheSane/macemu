@@ -26,6 +26,7 @@
 #define USE_LIVENESS_ANALYSIS
 #define USE_TCG_OPTIMIZATIONS
 
+#include <unistd.h>
 #include "config.h"
 
 /* Define to jump the ELF file used to communicate with GDB.  */
@@ -36,15 +37,15 @@
 #define NDEBUG
 #endif
 
-#include "qemu-common.h"
-#include "qemu/host-utils.h"
-#include "qemu/timer.h"
+//#include "qemu-common.h"
+//#include "qemu/host-utils.h"
+//#include "qemu/timer.h"
 
 /* Note: the long term plan is to reduce the dependencies on the QEMU
    CPU definitions. Currently they are used for qemu_ld/st
    instructions */
 #define NO_CPU_IO_DEFS
-#include "cpu.h"
+//#include "cpu.h"
 
 #include "tcg-op.h"
 
@@ -85,7 +86,7 @@ typedef struct QEMU_PACKED {
     uintptr_t func_len;
 } DebugFrameFDEHeader;
 
-typedef struct QEMU_PACKED {
+typedef struct PACKED {
     DebugFrameCIE cie;
     DebugFrameFDEHeader fde;
 } DebugFrameHeader;

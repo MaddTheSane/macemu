@@ -31,6 +31,7 @@
 #include <mach-o/loader.h>
 #include <mach-o/fat.h>
 #include <sys/stat.h>
+#include <unistd.h>
 
 static const char progname[] = "lowmem";
 static const char *filename;

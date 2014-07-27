@@ -25,8 +25,9 @@
 #ifndef TCG_H
 #define TCG_H
 
-#include "qemu-common.h"
-#include "qemu/bitops.h"
+//#include "qemu-common.h"
+//#include "qemu/bitops.h"
+#include <stdbool.h>
 #include "tcg-target.h"
 
 /* Default target word size to pointer size.  */

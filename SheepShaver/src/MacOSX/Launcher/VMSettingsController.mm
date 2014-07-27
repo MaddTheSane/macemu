@@ -213,20 +213,13 @@ static NSString *makeRelativeIfNecessary(NSString *path)
   [open setCanChooseDirectories:YES];
   [open setAllowsMultipleSelection:NO];
   [open setTreatsFilePackagesAsDirectories:YES];
-  [open beginSheetForDirectory: [[NSFileManager defaultManager] currentDirectoryPath]
-                          file: @"Unknown"
-                modalForWindow: [self window]
-                 modalDelegate: self
-                didEndSelector: @selector(_addDiskEnd:returnCode:contextInfo:)
-                   contextInfo: nil];
-}
-
-- (void)_addDiskEnd:(NSOpenPanel *)open returnCode:(int)theReturnCode contextInfo:(void *)theContextInfo
-{
-  if (theReturnCode == NSOKButton) {
-    [diskArray addObject: makeRelativeIfNecessary([open filename])];
-    [disks reloadData];
-  }
+  open.directoryURL = [NSURL fileURLWithPath:[[NSFileManager defaultManager] currentDirectoryPath]];
+  [open beginSheetModalForWindow:[self window] completionHandler:^(NSInteger theReturnCode) {
+    if (theReturnCode == NSOKButton) {
+      [diskArray addObject: makeRelativeIfNecessary([[open URL] path])];
+      [disks reloadData];
+    }
+  }];
 }
 
 - (IBAction)removeDisk:(id)sender
@@ -243,29 +236,26 @@ static NSString *makeRelativeIfNecessary(NSString *path)
   NSSavePanel *save = [NSSavePanel savePanel];
   [save setAccessoryView: diskSaveSize];
   [save setTreatsFilePackagesAsDirectories:YES];
-  [save beginSheetForDirectory: [[NSFileManager defaultManager] currentDirectoryPath]
-                          file: @"New.dsk"
-                modalForWindow: [self window]
-                 modalDelegate: self
-                didEndSelector: @selector(_createDiskEnd:returnCode:contextInfo:)
-                   contextInfo: nil];
-}
-
-- (void)_createDiskEnd:(NSSavePanel *)save returnCode:(int)theReturnCode contextInfo:(void *)theContextInfo
-{
-  if (theReturnCode == NSOKButton) {
-    int size = [diskSaveSizeField intValue];
-    if (size >= 0 && size <= 10000) {
-      char cmd[1024];
-      snprintf(cmd, sizeof(cmd), "dd if=/dev/zero \"of=%s\" bs=1024k count=%d", [[save filename] UTF8String], [diskSaveSizeField intValue]);
-      int ret = system(cmd);
-      if (ret == 0) {
-        [diskArray addObject: makeRelativeIfNecessary([save filename])];
-        [disks reloadData];
-      }
+  save.directoryURL = [NSURL fileURLWithPath:[[NSFileManager defaultManager] currentDirectoryPath]];
+  [save beginSheetModalForWindow:[self window] completionHandler:^(NSInteger theReturnCode) {
+    if (theReturnCode == NSOKButton) {
+      dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        int size = [diskSaveSizeField intValue];
+        if (size >= 0 && size <= 10000) {
+          char cmd[1024];
+          snprintf(cmd, sizeof(cmd), "dd if=/dev/zero \"of=%s\" bs=1024k count=%d", [[[save URL] path] fileSystemRepresentation], [diskSaveSizeField intValue]);
+          int ret = system(cmd);
+          if (ret == 0) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+              [diskArray addObject: makeRelativeIfNecessary([[save URL] path])];
+              [disks reloadData];
+            });
+          }
+        }
+        
+      });
     }
-  }
-  [(NSData *)theContextInfo release];
+  }];
 }
 
 - (IBAction)useRawKeyCodesClicked:(id)sender
@@ -280,19 +270,13 @@ static NSString *makeRelativeIfNecessary(NSString *path)
   [open setCanChooseDirectories:NO];
   [open setAllowsMultipleSelection:NO];
   [open setTreatsFilePackagesAsDirectories:YES];
-  [open beginSheetForDirectory: NSHomeDirectory()
-                          file: [romFile stringValue]
-                modalForWindow: [self window]
-                 modalDelegate: self
-                didEndSelector: @selector(_browseForROMFileEnd:returnCode:contextInfo:)
-                   contextInfo: nil];
-}
-
-- (void)_browseForROMFileEnd:(NSOpenPanel *)open returnCode:(int)theReturnCode contextInfo:(void *)theContextInfo
-{
-  if (theReturnCode == NSOKButton) {
-    [romFile setStringValue: makeRelativeIfNecessary([open filename])];
-  }
+  open.directoryURL = [[NSURL fileURLWithPath:romFile.stringValue] URLByDeletingLastPathComponent];
+  open.nameFieldStringValue = [romFile.stringValue lastPathComponent];
+  [open beginSheetModalForWindow:[self window] completionHandler:^(NSInteger theReturnCode) {
+    if (theReturnCode == NSOKButton) {
+      [romFile setStringValue: makeRelativeIfNecessary([[open URL] path])];
+    }
+  }];
 }
 
 - (IBAction)browseForUnixRootClicked:(id)sender

@@ -24,6 +24,7 @@
 #define _UINT64
 #import <Cocoa/Cocoa.h>
 #include <ApplicationServices/ApplicationServices.h>
+#include <CoreServices/CoreServices.h>
 
 #include "clip.h"
 #include "main.h"
@@ -235,7 +236,7 @@ static NSData *ConvertToMacTextEncoding(NSAttributedString *aStr, NSArray **styl
 	[[aStr string] getCharacters:chars range:NSMakeRange(0, length)];
 
 	NSUInteger unicodeLength = length * sizeof(unichar);
-	NSUInteger bufLen = unicodeLength * 2;
+	ByteCount bufLen = unicodeLength * 2;
 	uint8_t buf[bufLen];
 	ByteCount bytesRead;
 
@@ -256,7 +257,7 @@ static NSData *ConvertToMacTextEncoding(NSAttributedString *aStr, NSArray **styl
 	ItemCount offsetCount;
 	ByteOffset offsets[inOffsetCount];
 
-	err = ConvertFromUnicodeToScriptCodeRun(info, unicodeLength, chars,
+	err = ::ConvertFromUnicodeToScriptCodeRun(info, unicodeLength, chars,
 											kUnicodeTextRunMask | kUnicodeUseFallbacksMask | kUnicodeLooseMappingsMask,
 											inOffsetCount, inOffsets, &offsetCount, offsets,
 											bufLen, &bytesRead, &bufLen, buf,
