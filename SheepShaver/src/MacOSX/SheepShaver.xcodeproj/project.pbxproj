@@ -39,8 +39,6 @@
 		0846E4C114B1268B00574779 /* jit-cache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0856CDCD14A99EEF000B1711 /* jit-cache.cpp */; };
 		0846E4C214B1269600574779 /* basic-dyngen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0856CDC514A99EEF000B1711 /* basic-dyngen.cpp */; };
 		0846E51314B128ED00574779 /* sheepshaver_glue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0856CDBB14A99EEF000B1711 /* sheepshaver_glue.cpp */; };
-		0846E52B14B12A0800574779 /* ppc_asm.S in Sources */ = {isa = PBXBuildFile; fileRef = 0846E52314B129DA00574779 /* ppc_asm.S */; };
-		0846E55314B12B0D00574779 /* paranoia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0846E55214B12B0D00574779 /* paranoia.cpp */; };
 		0846E65414B513CE00574779 /* SDL.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 0856D17414A9A1A2000B1711 /* SDL.framework */; };
 		0856CFC114A99EF0000B1711 /* adb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0856CD4B14A99EEF000B1711 /* adb.cpp */; };
 		0856CFC214A99EF0000B1711 /* audio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0856CD4C14A99EEF000B1711 /* audio.cpp */; };
@@ -110,7 +108,6 @@
 		08D93A16159FE174003B04EC /* clip_macosx64.mm in Sources */ = {isa = PBXBuildFile; fileRef = 08D93A15159FE174003B04EC /* clip_macosx64.mm */; };
 		5588B3CE1795C52F00BE6E37 /* VMSettingsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5588B3CC1795C52F00BE6E37 /* VMSettingsWindow.xib */; };
 		55DBA7DD17D17EDF00FA2084 /* libkpx_cpu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0846E49A14B124DE00574779 /* libkpx_cpu.a */; };
-		55DBA7DE17D17EDF00FA2084 /* libppc_asm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0846E52814B129EE00574779 /* libppc_asm.a */; };
 		55DBA7DF17D17EDF00FA2084 /* libclip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0885A5211593E3B6005C4F7B /* libclip.a */; };
 		55DBA7E017D17EDF00FA2084 /* libclip64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0885A5341593E47F005C4F7B /* libclip64.a */; };
 		55DBAA3717D1AC7A00FA2084 /* bootp.c in Sources */ = {isa = PBXBuildFile; fileRef = 0856CE9714A99EF0000B1711 /* bootp.c */; };
@@ -185,13 +182,6 @@
 			remoteGlobalIDString = 0873A67314AB8AE9004F12B7;
 			remoteInfo = "ppc-execute-impl";
 		};
-		0846E52D14B12A2E00574779 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0856CCAE14A99DE0000B1711 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0846E52714B129EE00574779;
-			remoteInfo = ppc_asm;
-		};
 		0873A60214AB83CC004F12B7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0856CCAE14A99DE0000B1711 /* Project object */;
@@ -255,7 +245,6 @@
 		083E372116EFE87200CCCA59 /* tinyxml2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinyxml2.h; path = ../../../BasiliskII/src/Unix/tinyxml2.h; sourceTree = SOURCE_ROOT; };
 		0846E49A14B124DE00574779 /* libkpx_cpu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libkpx_cpu.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0846E52314B129DA00574779 /* ppc_asm.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = ppc_asm.S; sourceTree = "<group>"; };
-		0846E52814B129EE00574779 /* libppc_asm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libppc_asm.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0846E55214B12B0D00574779 /* paranoia.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = paranoia.cpp; sourceTree = "<group>"; };
 		0856CCC114A99E1C000B1711 /* SheepShaver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SheepShaver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0856CD4B14A99EEF000B1711 /* adb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = adb.cpp; path = ../../../BasiliskII/src/adb.cpp; sourceTree = SOURCE_ROOT; };
@@ -500,20 +489,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0846E52614B129EE00574779 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0856CCBF14A99E1C000B1711 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				55DBAA4D17D1AD2200FA2084 /* libslirp.a in Frameworks */,
 				55DBA7DD17D17EDF00FA2084 /* libkpx_cpu.a in Frameworks */,
-				55DBA7DE17D17EDF00FA2084 /* libppc_asm.a in Frameworks */,
 				55DBA7DF17D17EDF00FA2084 /* libclip.a in Frameworks */,
 				55DBA7E017D17EDF00FA2084 /* libclip64.a in Frameworks */,
 				08CD42DC14B7B85B009CA2A2 /* Cocoa.framework in Frameworks */,
@@ -594,7 +575,6 @@
 				0873A5C514AB8038004F12B7 /* libbasic-dyngen-ops.a */,
 				0873A5CC14AB806D004F12B7 /* libppc-dyngen-ops.a */,
 				0846E49A14B124DE00574779 /* libkpx_cpu.a */,
-				0846E52814B129EE00574779 /* libppc_asm.a */,
 				0885A5211593E3B6005C4F7B /* libclip.a */,
 				0885A5341593E47F005C4F7B /* libclip64.a */,
 				55DBAA3417D1AC3F00FA2084 /* libslirp.a */,
@@ -879,8 +859,10 @@
 				0856CE8714A99EF0000B1711 /* sys_darwin.cpp */,
 				5588B42E1795C9E000BE6E37 /* autorelease.h */,
 			);
+			indentWidth = 2;
 			name = MacOSX;
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		0856CE8F14A99EF0000B1711 /* SDL */ = {
 			isa = PBXGroup;
@@ -1030,13 +1012,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0846E52414B129EE00574779 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0873A5C114AB8038004F12B7 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1139,23 +1114,6 @@
 			productReference = 0846E49A14B124DE00574779 /* libkpx_cpu.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		0846E52714B129EE00574779 /* ppc_asm */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0846E52C14B12A2600574779 /* Build configuration list for PBXNativeTarget "ppc_asm" */;
-			buildPhases = (
-				0846E52414B129EE00574779 /* Headers */,
-				0846E52514B129EE00574779 /* Sources */,
-				0846E52614B129EE00574779 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ppc_asm;
-			productName = ppc_asm;
-			productReference = 0846E52814B129EE00574779 /* libppc_asm.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		0856CCC014A99E1C000B1711 /* SheepShaver */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0856CCC714A99E1D000B1711 /* Build configuration list for PBXNativeTarget "SheepShaver" */;
@@ -1171,7 +1129,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				0846E52E14B12A2E00574779 /* PBXTargetDependency */,
 				0846E4A714B1253500574779 /* PBXTargetDependency */,
 				082AC26814AA5A4800071F5E /* PBXTargetDependency */,
 				0885A53A1593E4BC005C4F7B /* PBXTargetDependency */,
@@ -1293,6 +1250,8 @@
 /* Begin PBXProject section */
 		0856CCAE14A99DE0000B1711 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = 0856CCB114A99DE0000B1711 /* Build configuration list for PBXProject "SheepShaver" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -1315,7 +1274,6 @@
 				0873A5CB14AB806D004F12B7 /* ppc-dyngen-ops */,
 				0873A67314AB8AE9004F12B7 /* ppc-execute-impl */,
 				0846E49914B124DE00574779 /* kpx_cpu */,
-				0846E52714B129EE00574779 /* ppc_asm */,
 				0885A5201593E3B6005C4F7B /* clip */,
 				0885A52B1593E47F005C4F7B /* clip64 */,
 				55DBAA3317D1AC3F00FA2084 /* slirp */,
@@ -1467,15 +1425,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0846E52514B129EE00574779 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0846E52B14B12A0800574779 /* ppc_asm.S in Sources */,
-				0846E55314B12B0D00574779 /* paranoia.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0856CCBE14A99E1C000B1711 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1623,11 +1572,6 @@
 			target = 0873A67314AB8AE9004F12B7 /* ppc-execute-impl */;
 			targetProxy = 0846E4C714B126B800574779 /* PBXContainerItemProxy */;
 		};
-		0846E52E14B12A2E00574779 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0846E52714B129EE00574779 /* ppc_asm */;
-			targetProxy = 0846E52D14B12A2E00574779 /* PBXContainerItemProxy */;
-		};
 		0873A60314AB83CC004F12B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0873A5C414AB8038004F12B7 /* basic-dyngen-ops */;
@@ -1674,15 +1618,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_ENABLE_PASCAL_STRINGS = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = 4.2;
 				INSTALL_PATH = /usr/local/bin;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = lowmem;
 			};
 			name = Debug;
@@ -1694,14 +1633,10 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_PASCAL_STRINGS = NO;
-				GCC_VERSION = 4.2;
 				INSTALL_PATH = /usr/local/bin;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = lowmem;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -1737,7 +1672,6 @@
 					../include,
 				);
 				INSTALL_PATH = /usr/local/lib;
-				PREBINDING = NO;
 				PRODUCT_NAME = kpx_cpu;
 				VALID_ARCHS = "i386 x86_64";
 			};
@@ -1753,11 +1687,8 @@
 				);
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_AUTO_VECTORIZATION = YES;
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_SSE3_EXTENSIONS = YES;
-				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DATADIR=",
@@ -1778,72 +1709,20 @@
 					../include,
 				);
 				INSTALL_PATH = /usr/local/lib;
-				PREBINDING = NO;
 				PRODUCT_NAME = kpx_cpu;
 				VALID_ARCHS = "i386 x86_64";
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
-		0846E52914B129EF00574779 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = ppc;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = __ASSEMBLY__;
-				HEADER_SEARCH_PATHS = (
-					../Unix,
-					../include,
-				);
-				INSTALL_PATH = /usr/local/lib;
-				PRODUCT_NAME = ppc_asm;
-				VALID_ARCHS = "ppc ppc7400 ppc970";
-			};
-			name = Debug;
-		};
-		0846E52A14B129EF00574779 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = ppc;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = __ASSEMBLY__;
-				HEADER_SEARCH_PATHS = (
-					../Unix,
-					../include,
-				);
-				INSTALL_PATH = /usr/local/lib;
-				PRODUCT_NAME = ppc_asm;
-				VALID_ARCHS = "ppc ppc7400 ppc970";
 			};
 			name = Release;
 		};
 		0856CCAF14A99DE0000B1711 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-					x86_64,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_DEBUGGING_SYMBOLS = full;
-				GCC_MODEL_TUNING = G4;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = 4.0;
-				"GCC_VERSION[arch=x86_64]" = 4.2;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.6;
-				PREBINDING = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -1851,25 +1730,11 @@
 		0856CCB014A99DE0000B1711 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-					x86_64,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_AUTO_VECTORIZATION = YES;
-				GCC_ENABLE_SSE3_EXTENSIONS = YES;
-				GCC_ENABLE_SSE41_EXTENSIONS = YES;
-				GCC_ENABLE_SSE42_EXTENSIONS = YES;
-				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
-				GCC_MODEL_TUNING = G4;
-				GCC_VERSION = 4.0;
-				"GCC_VERSION[arch=x86_64]" = 4.2;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.6;
-				PREBINDING = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -1919,7 +1784,6 @@
 					"-Wl,-seg1addr,0x78048000",
 					"$(inherited)",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = SheepShaver;
 				VALID_ARCHS = "i386 ppc ppc7400 ppc970 x86_64";
 				WARNING_LDFLAGS = "";
@@ -1971,7 +1835,6 @@
 					"-Wl,-seg1addr,0x78048000",
 					"$(inherited)",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = SheepShaver;
 				VALID_ARCHS = "i386 ppc ppc7400 ppc970 x86_64";
 			};
@@ -1982,16 +1845,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = 4.2;
 				INSTALL_PATH = /usr/local/bin;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				OTHER_CFLAGS = "-mdynamic-no-pic";
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = dyngen;
 			};
 			name = Debug;
@@ -2001,15 +1857,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_VERSION = 4.2;
 				INSTALL_PATH = /usr/local/bin;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = dyngen;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -2035,7 +1886,6 @@
 					_THREAD_SAFE,
 					"_GNU_SOURCE=1",
 				);
-				"GCC_VERSION[arch=x86_64]" = 4.0;
 				HEADER_SEARCH_PATHS = (
 					../kpx_cpu/src,
 					../kpx_cpu/include,
@@ -2046,10 +1896,8 @@
 					"-fomit-frame-pointer",
 					"-fno-align-functions",
 					"-finline-functions",
-					"-finline-limit=10000",
 					"-fno-exceptions",
 					"-g0",
-					"-fno-reorder-blocks",
 					"-fno-optimize-sibling-calls",
 				);
 				OTHER_LDFLAGS = (
@@ -2058,7 +1906,6 @@
 					"-framework",
 					AppKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = "basic-dyngen-ops";
 				VALID_ARCHS = "i386 x86_64";
 			};
@@ -2085,15 +1932,12 @@
 					"-fomit-frame-pointer",
 					"-fno-align-functions",
 					"-finline-functions",
-					"-finline-limit=10000",
 					"-fno-exceptions",
 					"-g0",
-					"-fno-reorder-blocks",
 					"-fno-optimize-sibling-calls",
 				);
 				PRODUCT_NAME = "basic-dyngen-ops";
 				VALID_ARCHS = "i386 x86_64";
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -2120,10 +1964,8 @@
 					"-fomit-frame-pointer",
 					"-fno-align-functions",
 					"-finline-functions",
-					"-finline-limit=10000",
 					"-fno-exceptions",
 					"-g0",
-					"-fno-reorder-blocks",
 					"-fno-optimize-sibling-calls",
 				);
 				OTHER_LDFLAGS = (
@@ -2132,7 +1974,6 @@
 					"-framework",
 					AppKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = "ppc-dyngen-ops";
 				VALID_ARCHS = "i386 x86_64";
 			};
@@ -2149,7 +1990,6 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				"GCC_VERSION[arch=x86_64]" = 4.0;
 				HEADER_SEARCH_PATHS = (
 					../kpx_cpu/src,
 					../kpx_cpu/include,
@@ -2160,13 +2000,10 @@
 					"-fomit-frame-pointer",
 					"-fno-align-functions",
 					"-finline-functions",
-					"-finline-limit=10000",
 					"-fno-exceptions",
 					"-g0",
-					"-fno-reorder-blocks",
 					"-fno-optimize-sibling-calls",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = "ppc-dyngen-ops";
 				VALID_ARCHS = "i386 x86_64";
 			};
@@ -2199,10 +2036,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2219,7 +2053,7 @@
 					../include,
 				);
 				INSTALL_PATH = /usr/local/lib;
-				PREBINDING = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = clip;
 				VALID_ARCHS = "i386 ppc ppc7400 ppc970";
 			};
@@ -2229,10 +2063,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -2247,10 +2078,9 @@
 					../include,
 				);
 				INSTALL_PATH = /usr/local/lib;
-				PREBINDING = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = clip;
 				VALID_ARCHS = "i386 ppc ppc7400 ppc970";
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -2275,7 +2105,7 @@
 					../include,
 				);
 				INSTALL_PATH = /usr/local/lib;
-				PREBINDING = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = clip64;
 				VALID_ARCHS = "ppc64 x86_64";
 			};
@@ -2300,10 +2130,9 @@
 					../include,
 				);
 				INSTALL_PATH = /usr/local/lib;
-				PREBINDING = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = clip64;
 				VALID_ARCHS = "ppc64 x86_64";
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -2328,7 +2157,6 @@
 				);
 				INSTALL_PATH = /usr/local/lib;
 				ONLY_ACTIVE_ARCH = YES;
-				PREBINDING = NO;
 				PRODUCT_NAME = slirp;
 			};
 			name = Debug;
@@ -2351,7 +2179,6 @@
 					"\"$(SRCROOT)\"/../slirp",
 				);
 				INSTALL_PATH = /usr/local/lib;
-				PREBINDING = NO;
 				PRODUCT_NAME = slirp;
 			};
 			name = Release;
@@ -2373,15 +2200,6 @@
 			buildConfigurations = (
 				0846E49B14B124DF00574779 /* Debug */,
 				0846E49C14B124DF00574779 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0846E52C14B12A2600574779 /* Build configuration list for PBXNativeTarget "ppc_asm" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0846E52914B129EF00574779 /* Debug */,
-				0846E52A14B129EF00574779 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
