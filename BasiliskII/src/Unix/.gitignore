@@ -4,6 +4,7 @@ BasiliskII
 BasiliskII.app
 Darwin/lowmem
 Darwin/pagezero
+etherhelpertool
 
 # Autotools generated files
 Makefile

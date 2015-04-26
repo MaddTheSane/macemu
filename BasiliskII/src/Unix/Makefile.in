@@ -74,6 +74,10 @@ CXXFLAGS += $(GUI_CFLAGS)
 LIBS += $(GUI_LIBS)
 endif
 
+ifeq (@MACOSX_ETHERHELPER@,yes)
+PROGS += etherhelpertool
+endif
+
 ## Rules
 .PHONY: modules install installdirs uninstall mostlyclean clean distclean depend dep
 .SUFFIXES:
@@ -126,6 +130,9 @@ $(APP)_app: $(APP) $(OSX_DOCS) ../../README ../MacOSX/Info.plist ../MacOSX/$(APP
 	./cpr.sh ../MacOSX/English.lproj $(APP_APP)/Contents/Resources/
 	cp -f $(OSX_DOCS) $(APP_APP)/Contents/Resources/
 	cp -f ../../README $(APP_APP)/Contents/Resources/README.txt
+ifeq (@MACOSX_ETHERHELPER@,yes)
+	cp -f etherhelpertool $(APP_APP)/Contents/Resources
+endif
 
 $(GUI_APP)_app: $(GUI_APP) ../MacOSX/Info.plist ../MacOSX/$(APP).icns
 	rm -rf $(GUI_APP_APP)/Contents
@@ -137,6 +144,9 @@ $(GUI_APP)_app: $(GUI_APP) ../MacOSX/Info.plist ../MacOSX/$(APP).icns
 	strip -x $(GUI_APP_APP)/Contents/MacOS/$(GUI_APP)
 	mkdir -p $(GUI_APP_APP)/Contents/Resources
 	./cpr.sh ../MacOSX/$(APP).icns $(GUI_APP_APP)/Contents/Resources/$(GUI_APP).icns
+
+etherhelpertool: ../MacOSX/etherhelpertool.c
+	$(CC) $(CPPFLAGS) $(DEFS) $(CFLAGS) $(LIBS) $(LDFLAGS) $<  -o $@
 
 modules:
 	cd Linux/NetDriver; make
@@ -168,12 +178,13 @@ mostlyclean:
 
 clean: mostlyclean
 	rm -f cpuemu.cpp cpudefs.cpp cputmp*.s cpufast*.s cpustbl.cpp cputbl.h compemu.cpp compstbl.cpp comptbl.h
+	rm -rf etherhelpertool.dSYM
 
 distclean: clean
 	rm -rf $(OBJ_DIR)
 	rm -rf autom4te.cache
 	rm -f Makefile
-	rm -f config.cache config.log config.status config.h
+	rm -f config.cache config.log config.status config.h config.h.in configure
 	rm -f Darwin/lowmem Darwin/pagezero
 
 depend dep:

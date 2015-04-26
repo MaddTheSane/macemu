@@ -106,10 +106,11 @@ extern "C" {
 #define SIGSEGV_REGISTER_FILE			((SIGSEGV_REGISTER_TYPE *)&SIP->thr_state.MACH_FIELD_NAME(rax)) /* RAX is the first GPR we consider */
 #endif
 #ifdef __x86_64__
-#define SIGSEGV_FAULT_ADDRESS_FAST		(((uint64_t)code[1])|0x100000000)
+#define SIGSEGV_FAULT_ADDRESS_FAST		code[1]
 #else
 #define SIGSEGV_FAULT_ADDRESS_FAST		code[1]
 #endif
+
 #define SIGSEGV_FAULT_INSTRUCTION_FAST	SIGSEGV_INVALID_ADDRESS
 #define SIGSEGV_FAULT_HANDLER_ARGLIST	mach_port_t thread, mach_exception_data_t code
 #define SIGSEGV_FAULT_HANDLER_ARGS		thread, code

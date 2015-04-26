@@ -24,6 +24,15 @@ AC_ARG_ENABLE(macosx-gui,    [  --enable-macosx-gui     enable Mac OS X GUI [def
 dnl Mac OS X Sound
 AC_ARG_ENABLE(macosx-sound,  [  --enable-macosx-sound   enable Mac OS X Sound [default=no]], [WANT_MACOSX_SOUND=$enableval], [WANT_MACOSX_SOUND=no])
 
+dnl Apple Sound Chip Emulation
+AC_ARG_ENABLE(asc-emu,       [  --enable-asc-emu        enable Apple Sound Chip emulation [default=no]], [WANT_ASC_EMU=$enableval], [WANT_ASC_EMU=no])
+
+dnl Mac OS X etherhelper support
+AC_ARG_ENABLE(macosx-etherhelper,  [  --enable-macosx-etherhelper   enable Mac OS X Ethernet Helper Program [default=no]], [WANT_MACOSX_ETHERHELPER=$enableval], [WANT_MACOSX_ETHERHELPER=no])
+
+dnl 32-bit build
+AC_ARG_ENABLE(32-bit-build,  [  --enable-32-bit-build   enable a 32-bit build [default=no]], [WANT_32BIT_BUILD=$enableval], [WANT_32BIT_BUILD=no])
+
 dnl Video options.
 AC_ARG_ENABLE(xf86-dga,      [  --enable-xf86-dga       use the XFree86 DGA extension [default=yes]], [WANT_XF86_DGA=$enableval], [WANT_XF86_DGA=yes])
 AC_ARG_ENABLE(xf86-vidmode,  [  --enable-xf86-vidmode   use the XFree86 VidMode extension [default=yes]], [WANT_XF86_VIDMODE=$enableval], [WANT_XF86_VIDMODE=yes])
@@ -119,7 +128,7 @@ case "$target_cpu" in
 esac
 
 dnl Check if we should really be assuming x86_64 even if we detected HAVE_I386 above.
-if [[ "x$HAVE_I386" = "xyes" ]]; then
+if [[ "x$HAVE_I386" == "xyes" ]]; then
   AC_TRY_RUN([
     int main(void) {
         #if defined(__x86_64__)
@@ -134,6 +143,11 @@ if [[ "x$HAVE_I386" = "xyes" ]]; then
   ])
 fi
 
+if [[ "x$HAVE_X86_64" == "xyes" ] && [ "x$WANT_32BIT_BUILD" == "xyes" ]]; then
+  HAVE_I386=yes
+  HAVE_X86_64=no
+fi
+
 dnl Checks for programs.
 AC_PROG_CC
 AC_PROG_CC_C_O
@@ -142,6 +156,12 @@ AC_PROG_CXX
 AC_PROG_MAKE_SET
 AC_PROG_INSTALL
 AC_PROG_EGREP
+
+if [[ "x$WANT_32BIT_BUILD" == "xyes" ]]; then
+CFLAGS+=" -m32"
+CXXFLAGS+=" -m32"
+LDFLAGS+=" -m32"
+fi
 
 dnl We use mon if possible.
 MONSRCS=
@@ -735,6 +755,19 @@ if [[ "x$WANT_MACOSX_SOUND" = "xyes" ]]; then
   LIBS="$LIBS -framework AudioToolbox -framework AudioUnit -framework CoreAudio"
 fi
 
+if [[ "x$WANT_MACOSX_ETHERHELPER" = "xyes" ]]; then
+    EXTRASYSSRCS="$EXTRASYSSRCS ../MacOSX/runtool.c"
+    LIBS="$LIBS -framework Security"
+    AC_DEFINE(ENABLE_MACOSX_ETHERHELPER, 1, [Define if supporting "etherhelper" network device.])
+fi
+
+if [[ "x$WANT_ASC_EMU" = "xyes" ]]; then
+    AC_DEFINE(ENABLE_ASC_EMU, 1, [Define if supporting Apple Sound Chip Emulation.])
+    AUDIOSRC+=" ../MacOSX/asc.cpp"
+fi
+
+AC_SUBST(MACOSX_ETHERHELPER, $WANT_MACOSX_ETHERHELPER)
+
 dnl SDL overrides
 if [[ "x$WANT_SDL" = "xyes" ]]; then
   AC_DEFINE(USE_SDL, 1, [Define to enble SDL support])
@@ -742,18 +775,20 @@ if [[ "x$WANT_SDL" = "xyes" ]]; then
     EXTRASYSSRCS="$EXTRASYSSRCS ../SDL/SDLMain.m"
   fi
 fi
+
+AC_MSG_CHECKING([whether __LP64__ is defined])
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#if !defined(__LP64__)
+                                     # error __LP64__ not defined
+                                     #endif
+                                   ]])],
+                  [AC_MSG_RESULT(yes); LP64_DEFINED=yes],
+                  [AC_MSG_RESULT(no)])
+
 if [[ "x$WANT_SDL_VIDEO" = "xyes" ]]; then
   AC_DEFINE(USE_SDL_VIDEO, 1, [Define to enable SDL video graphics support])
   VIDEOSRCS="../SDL/video_sdl.cpp"
   KEYCODES="../SDL/keycodes"
   if [[ "x$ac_cv_framework_Carbon" = "xyes" ]]; then
-    AC_MSG_CHECKING([whether __LP64__ is defined])
-    AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#if !defined(__LP64__)
-                                         # error __LP64__ not defined
-                                         #endif
-                                       ]])],
-                      [AC_MSG_RESULT(yes); LP64_DEFINED=yes],
-                      [AC_MSG_RESULT(no)])
     if [[ "x$LP64_DEFINED" = "xyes" ]]; then
       EXTRASYSSRCS="$EXTRASYSSRCS ../MacOSX/clip_macosx64.mm ../pict.c"
     else
@@ -1740,6 +1775,17 @@ if [[ "x$HAVE_IPA" = "xyes" ]]; then
   CXXFLAGS="`echo $CXXFLAGS | sed -e 's/-g//g'` -O3 -OPT:Olimit=0 -IPA"
   CXXFLAGS="-LANG:std $CXXFLAGS"
   LDFLAGS="$LDFLAGS -O3 -OPT:Olimit=0 -IPA"
+fi
+
+if [[ `uname -s` = Darwin ]]; then
+   MACOSVERSION=`sw_vers -productVersion | cut -d. -f2`
+   if [[ ${MACOSVERSION} -gt 6 ]]; then
+     LIBS+=" -Wl,-no_pie"
+   fi
+fi
+
+if [[ "x$LP64_DEFINED" = "xyes" ] && [ "x$have_mach_vm" = "xyes" ]]; then
+LIBS+=" -Wl,-pagezero_size,0x1000"
 fi
 
 dnl Generate Makefile.

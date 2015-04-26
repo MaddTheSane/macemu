@@ -38,6 +38,7 @@
 #include <string.h>
 #include <limits.h>
 #include "vm_alloc.h"
+#include "sysdeps.h"
 
 #if defined(__APPLE__) && defined(__MACH__)
 #include <sys/utsname.h>
@@ -225,6 +226,9 @@ void vm_exit(void)
 /* Allocate zero-filled memory of SIZE bytes. The mapping is private
    and default protection bits are read / write. The return value
    is the actual mapping address chosen or VM_MAP_FAILED for errors.  */
+#if defined(HAVE_MACH_VM)
+static void *last_alloc = NULL;
+#endif
 
 void * vm_acquire(size_t size, int options)
 {
@@ -242,8 +246,30 @@ void * vm_acquire(size_t size, int options)
 #endif
 
 #if defined(HAVE_MACH_VM)
-	// vm_allocate() returns a zero-filled memory region
-	kern_return_t ret_code = vm_allocate(mach_task_self(), (vm_address_t *)&addr, size, TRUE);
+	static size_t addrOffset = 0x20000000;
+	kern_return_t ret_code;
+	static uint8 *base32 = NULL;
+
+	if(options & VM_MAP_32BIT) {
+#ifdef __LP64__
+		addr = base32 + addrOffset;
+		ret_code = vm_allocate(mach_task_self(), (vm_address_t *)&addr, 
+				       size, VM_FLAGS_FIXED | VM_FLAGS_OVERWRITE);
+		if(ret_code == KERN_SUCCESS) {
+			last_alloc = addr;
+			base32 = base32 + size;
+		}
+#else
+		// vm_allocate() returns a zero-filled memory region
+		ret_code = vm_allocate(mach_task_self(), (vm_address_t *)&addr, 
+				       size, VM_FLAGS_ANYWHERE);
+#endif
+	} else {
+		// vm_allocate() returns a zero-filled memory region
+		ret_code = vm_allocate(mach_task_self(), (vm_address_t *)&addr, 
+				       size, VM_FLAGS_ANYWHERE);
+	}
+
 	if (ret_code != KERN_SUCCESS) {
 		errno = vm_error(ret_code);
 		return VM_MAP_FAILED;
@@ -301,7 +327,20 @@ int vm_acquire_fixed(void * addr, size_t size, int options)
 
 #if defined(HAVE_MACH_VM)
 	// vm_allocate() returns a zero-filled memory region
-	kern_return_t ret_code = vm_allocate(mach_task_self(), (vm_address_t *)&addr, size, 0);
+
+#ifdef __LP64__
+	if(addr != last_alloc) {
+		return -1;
+	}
+
+	kern_return_t ret_code = vm_allocate(mach_task_self(), 
+					     (vm_address_t *)&addr, size, 
+					     VM_FLAGS_FIXED | VM_FLAGS_OVERWRITE);
+
+#else
+	kern_return_t ret_code = vm_allocate(mach_task_self(), (vm_address_t *)&addr, size, 
+					     VM_FLAGS_FIXED);
+#endif
 	if (ret_code != KERN_SUCCESS) {
 		errno = vm_error(ret_code);
 		return -1;
