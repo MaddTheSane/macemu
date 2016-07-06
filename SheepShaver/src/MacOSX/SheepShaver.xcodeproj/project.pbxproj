@@ -110,7 +110,6 @@
 		08D93A16159FE174003B04EC /* clip_macosx64.mm in Sources */ = {isa = PBXBuildFile; fileRef = 08D93A15159FE174003B04EC /* clip_macosx64.mm */; };
 		5588B3CE1795C52F00BE6E37 /* VMSettingsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5588B3CC1795C52F00BE6E37 /* VMSettingsWindow.xib */; };
 		55DBA7DD17D17EDF00FA2084 /* libkpx_cpu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0846E49A14B124DE00574779 /* libkpx_cpu.a */; };
-		55DBA7DE17D17EDF00FA2084 /* libppc_asm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0846E52814B129EE00574779 /* libppc_asm.a */; };
 		55DBA7DF17D17EDF00FA2084 /* libclip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0885A5211593E3B6005C4F7B /* libclip.a */; };
 		55DBA7E017D17EDF00FA2084 /* libclip64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0885A5341593E47F005C4F7B /* libclip64.a */; };
 		55DBAA3717D1AC7A00FA2084 /* bootp.c in Sources */ = {isa = PBXBuildFile; fileRef = 0856CE9714A99EF0000B1711 /* bootp.c */; };
@@ -184,13 +183,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 0873A67314AB8AE9004F12B7;
 			remoteInfo = "ppc-execute-impl";
-		};
-		0846E52D14B12A2E00574779 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0856CCAE14A99DE0000B1711 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0846E52714B129EE00574779;
-			remoteInfo = ppc_asm;
 		};
 		0873A60214AB83CC004F12B7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -513,7 +505,6 @@
 			files = (
 				55DBAA4D17D1AD2200FA2084 /* libslirp.a in Frameworks */,
 				55DBA7DD17D17EDF00FA2084 /* libkpx_cpu.a in Frameworks */,
-				55DBA7DE17D17EDF00FA2084 /* libppc_asm.a in Frameworks */,
 				55DBA7DF17D17EDF00FA2084 /* libclip.a in Frameworks */,
 				55DBA7E017D17EDF00FA2084 /* libclip64.a in Frameworks */,
 				08CD42DC14B7B85B009CA2A2 /* Cocoa.framework in Frameworks */,
@@ -1171,7 +1162,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				0846E52E14B12A2E00574779 /* PBXTargetDependency */,
 				0846E4A714B1253500574779 /* PBXTargetDependency */,
 				082AC26814AA5A4800071F5E /* PBXTargetDependency */,
 				0885A53A1593E4BC005C4F7B /* PBXTargetDependency */,
@@ -1293,6 +1283,8 @@
 /* Begin PBXProject section */
 		0856CCAE14A99DE0000B1711 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = 0856CCB114A99DE0000B1711 /* Build configuration list for PBXProject "SheepShaver" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -1623,11 +1615,6 @@
 			target = 0873A67314AB8AE9004F12B7 /* ppc-execute-impl */;
 			targetProxy = 0846E4C714B126B800574779 /* PBXContainerItemProxy */;
 		};
-		0846E52E14B12A2E00574779 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0846E52714B129EE00574779 /* ppc_asm */;
-			targetProxy = 0846E52D14B12A2E00574779 /* PBXContainerItemProxy */;
-		};
 		0873A60314AB83CC004F12B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0873A5C414AB8038004F12B7 /* basic-dyngen-ops */;
@@ -1678,7 +1665,6 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_PASCAL_STRINGS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = 4.2;
 				INSTALL_PATH = /usr/local/bin;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "";
@@ -1695,7 +1681,6 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_PASCAL_STRINGS = NO;
-				GCC_VERSION = 4.2;
 				INSTALL_PATH = /usr/local/bin;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "";
@@ -1828,22 +1813,12 @@
 		0856CCAF14A99DE0000B1711 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-					x86_64,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_DEBUGGING_SYMBOLS = full;
-				GCC_MODEL_TUNING = G4;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = 4.0;
-				"GCC_VERSION[arch=x86_64]" = 4.2;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.6;
-				PREBINDING = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -1851,25 +1826,11 @@
 		0856CCB014A99DE0000B1711 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-					x86_64,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_AUTO_VECTORIZATION = YES;
-				GCC_ENABLE_SSE3_EXTENSIONS = YES;
-				GCC_ENABLE_SSE41_EXTENSIONS = YES;
-				GCC_ENABLE_SSE42_EXTENSIONS = YES;
-				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
-				GCC_MODEL_TUNING = G4;
-				GCC_VERSION = 4.0;
-				"GCC_VERSION[arch=x86_64]" = 4.2;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.6;
-				PREBINDING = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -1931,7 +1892,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEAD_CODE_STRIPPING = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_CW_ASM_SYNTAX = NO;
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -1986,7 +1946,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = 4.2;
 				INSTALL_PATH = /usr/local/bin;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "-mdynamic-no-pic";
@@ -2003,7 +1962,6 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_VERSION = 4.2;
 				INSTALL_PATH = /usr/local/bin;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "";
@@ -2199,10 +2157,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2229,10 +2184,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
