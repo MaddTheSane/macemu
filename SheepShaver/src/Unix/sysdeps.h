@@ -292,7 +292,7 @@ static inline int testandset(volatile int *p)
 #define HAVE_TEST_AND_SET 1
 static inline int testandset(volatile int *p)
 {
-	long int ret;
+	int ret;
 	/* Note: the "xchg" instruction does not need a "lock" prefix */
 	__asm__ __volatile__("xchgl %k0, %1"
 						 : "=r" (ret), "=m" (*p)

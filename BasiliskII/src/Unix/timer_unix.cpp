@@ -71,7 +71,7 @@ void Microseconds(uint32 &hi, uint32 &lo)
 	uint64 tl = (uint64)t.tv_sec * 1000000 + t.tv_usec;
 #endif
 	hi = tl >> 32;
-	lo = tl;
+	lo = tl & 0xffffffff;
 }
 
 

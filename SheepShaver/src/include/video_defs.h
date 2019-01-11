@@ -164,9 +164,9 @@ enum {
 
 enum {
 	kDisplayModeIDCurrent		= 0x00,							/* Reference the Current DisplayModeID */
-	kDisplayModeIDInvalid		= (long)0xFFFFFFFF,				/* A bogus DisplayModeID in all cases */
-	kDisplayModeIDFindFirstResolution = (long)0xFFFFFFFE,		/* Used in cscGetNextResolution to reset iterator */
-	kDisplayModeIDNoMoreResolutions = (long)0xFFFFFFFD			/* Used in cscGetNextResolution to indicate End Of List */
+	kDisplayModeIDInvalid		= (int)0xFFFFFFFF,				/* A bogus DisplayModeID in all cases */
+	kDisplayModeIDFindFirstResolution = (int)0xFFFFFFFE,		/* Used in cscGetNextResolution to reset iterator */
+	kDisplayModeIDNoMoreResolutions = (int)0xFFFFFFFD			/* Used in cscGetNextResolution to indicate End Of List */
 };
 
 /* codes for Display Manager status requests */
