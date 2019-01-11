@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		084186B10B3A0515004B1F63 /* VMSettingsController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 084186B00B3A0515004B1F63 /* VMSettingsController.mm */; };
+		088EBBB61B41AEBB0066D352 /* DiskType.m in Sources */ = {isa = PBXBuildFile; fileRef = 088EBBB51B41AEBB0066D352 /* DiskType.m */; };
 		08AAB16D102614D5007E1230 /* SheepShaver.icns in Resources */ = {isa = PBXBuildFile; fileRef = 08AAB16C102614D5007E1230 /* SheepShaver.icns */; };
 		08AAB1B310261691007E1230 /* SheepShaver in Copy SheepShaver */ = {isa = PBXBuildFile; fileRef = 08AAB1B11026168B007E1230 /* SheepShaver */; };
 		08B5FB221024FE320047FD1B /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 08B5FB211024FE320047FD1B /* AppController.mm */; };
@@ -41,6 +42,12 @@
 		084186AF0B3A0515004B1F63 /* VMSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = VMSettingsController.h; sourceTree = "<group>"; };
 		084186B00B3A0515004B1F63 /* VMSettingsController.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = VMSettingsController.mm; sourceTree = "<group>"; };
 		085339D612C9874400345D35 /* LauncherPrefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherPrefix.h; sourceTree = SOURCE_ROOT; };
+		088EBB6F1B41ABDA0066D352 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../config/config.h; sourceTree = SOURCE_ROOT; };
+		088EBB701B41ABE40066D352 /* config-macosx-ppc_32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "config-macosx-ppc_32.h"; path = "../config/config-macosx-ppc_32.h"; sourceTree = SOURCE_ROOT; };
+		088EBB711B41ABE40066D352 /* config-macosx-x86_32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "config-macosx-x86_32.h"; path = "../config/config-macosx-x86_32.h"; sourceTree = SOURCE_ROOT; };
+		088EBB721B41ABE40066D352 /* config-macosx-x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "config-macosx-x86_64.h"; path = "../config/config-macosx-x86_64.h"; sourceTree = SOURCE_ROOT; };
+		088EBBB41B41AEBB0066D352 /* DiskType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiskType.h; sourceTree = SOURCE_ROOT; };
+		088EBBB51B41AEBB0066D352 /* DiskType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiskType.m; sourceTree = SOURCE_ROOT; };
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		08AAB16C102614D5007E1230 /* SheepShaver.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = SheepShaver.icns; path = ../SheepShaver.icns; sourceTree = SOURCE_ROOT; };
 		08AAB1B11026168B007E1230 /* SheepShaver */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = SheepShaver; path = ../../Unix/SheepShaver; sourceTree = SOURCE_ROOT; };
@@ -63,10 +70,6 @@
 		5588B4041795C62500BE6E37 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		5588B40A1795C6AD00BE6E37 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/VMSettingsWindow.xib; sourceTree = "<group>"; };
 		5588B40E1795C6C600BE6E37 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/VMListWindow.xib; sourceTree = "<group>"; };
-		5588B4111795C6E400BE6E37 /* config-macosx-ppc_32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "config-macosx-ppc_32.h"; sourceTree = "<group>"; };
-		5588B4121795C6E400BE6E37 /* config-macosx-x86_32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "config-macosx-x86_32.h"; sourceTree = "<group>"; };
-		5588B4131795C6E400BE6E37 /* config-macosx-x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "config-macosx-x86_64.h"; sourceTree = "<group>"; };
-		5588B4141795C6E400BE6E37 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* SheepShaverLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SheepShaverLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -135,6 +138,8 @@
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				08B5FB201024FE320047FD1B /* AppController.h */,
 				08B5FB211024FE320047FD1B /* AppController.mm */,
+				088EBBB41B41AEBB0066D352 /* DiskType.h */,
+				088EBBB51B41AEBB0066D352 /* DiskType.m */,
 				084186AF0B3A0515004B1F63 /* VMSettingsController.h */,
 				084186B00B3A0515004B1F63 /* VMSettingsController.mm */,
 				08F4D172102601C500C6436D /* VMListController.h */,
@@ -177,10 +182,10 @@
 		5588B4101795C6E400BE6E37 /* config */ = {
 			isa = PBXGroup;
 			children = (
-				5588B4111795C6E400BE6E37 /* config-macosx-ppc_32.h */,
-				5588B4121795C6E400BE6E37 /* config-macosx-x86_32.h */,
-				5588B4131795C6E400BE6E37 /* config-macosx-x86_64.h */,
-				5588B4141795C6E400BE6E37 /* config.h */,
+				088EBB701B41ABE40066D352 /* config-macosx-ppc_32.h */,
+				088EBB711B41ABE40066D352 /* config-macosx-x86_32.h */,
+				088EBB721B41ABE40066D352 /* config-macosx-x86_64.h */,
+				088EBB6F1B41ABDA0066D352 /* config.h */,
 			);
 			name = config;
 			path = ../config;
@@ -213,8 +218,10 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "SheepShaverLauncher" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -259,6 +266,7 @@
 				08DC90C10B67077300799A45 /* prefs.cpp in Sources */,
 				08B5FB221024FE320047FD1B /* AppController.mm in Sources */,
 				08F4D174102601C500C6436D /* VMListController.mm in Sources */,
+				088EBBB61B41AEBB0066D352 /* DiskType.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +321,7 @@
 					PREFS_EDITOR,
 					STANDALONE_PREFS,
 				);
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_CFLAGS = "$(inherited)";
@@ -325,21 +334,29 @@
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = (
 					ppc,
 					i386,
+					x86_64,
 				);
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_MODEL_TUNING = G5;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					PREFS_EDITOR,
 					STANDALONE_PREFS,
 				);
+				GCC_VERSION = 4.0;
+				"GCC_VERSION[arch=x86_64]" = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
 				OTHER_CFLAGS = "$(inherited)";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = SheepShaverLauncher;
+				"SDKROOT[arch=x86_64]" = macosx10.6;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -350,7 +367,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
 			};
 			name = Debug;
 		};
@@ -362,7 +379,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
 			};
 			name = Release;
 		};
